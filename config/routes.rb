@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     put :confirm, on: :member
   end
 
-  resources :species, only: [:index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
