@@ -1,1 +1,16 @@
-index
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <% @pets.each do |pet| %>
+        <div class="card mb-4">
+          <%= link_to pet_path(pet) do%>
+            <%= image_tag "dog.jpg", class: "card-img-top", alt: "dog"%>
+            <div class="card-header"><%= pet.title%></div>
+          <%end%>
+          <div class="card-body">Name: <%= pet.name%> <br>
+          Age: <%= age(pet.birthday) %></div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
