@@ -1,12 +1,13 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy bookings]
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @pets = Pet.all
   end
 
   def show
-    @pets = Pet.find(params[:id])
+    @request = Request.new
   end
 
   def new
