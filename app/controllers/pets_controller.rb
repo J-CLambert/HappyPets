@@ -1,12 +1,13 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy bookings]
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @pets = Pet.all
   end
 
   def show
-    @pets = Pet.find(params[:id])
+    @request = Request.new
   end
 
   def new
@@ -16,14 +17,10 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.user = current_user
-    respond_to do |format|
-      if @pet.save
-        format.html { redirect_to pet_path(@pet), notice: "Your pet ad was successfully created." }
-        format.json { render :show, status: :created, location: @pet }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @pet.errors, status: :unprocessable_entity }
-      end
+    if @pet.save
+      redirect_to pet_path(@pet), notice: "Your pet ad was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,14 +29,10 @@ class PetsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @pet.update(pet_params)
-        format.html { redirect_to pet_url(@pet), notice: "Your pet ad was successfully updated." }
-        format.json { render :show, status: :ok, location: @pet }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @pet.errors, status: :unprocessable_entity }
-      end
+    if @pet.update(pet_params)
+      redirect_to pet_path(@pet), notice: "Your pet ad was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -55,6 +48,6 @@ class PetsController < ApplicationController
   end
 
   def pet_params
-    params.require(:pet).permit(:name, :price, :description, :title, :birthday, :vaccinated_against, :species)
+    params.require(:pet).permit(:name, :price, :breed, :description, :title, :birthday, :vaccinated_against, :species)
   end
 end
