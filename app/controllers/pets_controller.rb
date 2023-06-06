@@ -7,7 +7,7 @@ class PetsController < ApplicationController
   end
 
   def show
-    @pets = Pet.find(params[:id])
+    @request = Request.new
   end
 
   def new
