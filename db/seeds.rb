@@ -14,6 +14,7 @@ Pet.delete_all
 puts 'Deleting previous users'
 User.delete_all
 
+species = ["dog","cat","bird","turtle","rabbit", "hamster", "ant colony"]
 5.times do
   mail = Faker::Internet.email
   user = User.create!(
@@ -32,7 +33,7 @@ User.delete_all
           birthday: Faker::Date.between(from: '1940-09-23', to: Date.today),
           vaccinated_against: Faker::JapaneseMedia::StudioGhibli.character,
           user_id: user.id,
-          species: Faker::Creature::Animal.name
+          species: species.shuffle.first
       )
     end
 end
