@@ -1,17 +1,22 @@
 
 <%= @pet.name %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= simple_form_for [@pet, @request] do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= simple_form_for [@pet, @request] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+        <div class="form-inputs">
+          <%= f.input :title %>
+          <%= f.input :message %>
+          <%= f.input :visit_date, label: "Proposing Visit Date", as: :datetime, minute_step: 30 %>
+        </div>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :message %>
-    <%= f.input :visit_date, label: "Propose Visit Date", as: :datetime %>
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>
