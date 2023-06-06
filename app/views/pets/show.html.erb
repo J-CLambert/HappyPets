@@ -1,1 +1,35 @@
-show
+<h1><%= @pet.name %></h1>
+<% if @pet.image.attached? %>
+  <%= image_tag "dog-cat.jpg" %>
+<% end %>
+<p>Price: <%= @pet.price %></p>
+<p>Breed: <%= @pet.breed %></p>
+<p>Description: <%= @pet.description %></p>
+<p>Title: <%= @pet.title %></p>
+<p>Birthday: <%= @pet.birthday %></p>
+<p>Vaccinated Against: <%= @pet.vaccinated_against %></p>
+<p>Species: <%= @pet.species %></p>
+
+<% if current_user && current_user == @pet.user %>
+  <p>
+    <%= link_to 'Edit', edit_pet_path(@pet) %> |
+    <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+
+<% if current_user && current_user != @pet.user %>
+  <p>
+    <%= link_to 'Send Visit Request', new_request_path(pet_id: @pet.id) %>
+  </p>
+<% end %>
+
+<% if @pet.requests.any? %>
+  <h2>Visit Requests</h2>
+  <ul>
+    <% @pet.requests.each do |request| %>
+      <li><%= link_to request.title, request_path(request) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Back', pets_path %>
