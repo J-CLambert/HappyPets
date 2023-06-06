@@ -1,9 +1,15 @@
 <div class="container">
-<div>
-  <% @pets.each do |pet| %>
-    <div class="card">
-      <%= pet.name%>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <% @pets.each do |pet| %>
+        <div class="card mb-4">
+          <%= link_to pet_path(pet) do%>
+            <h5><%= pet.title%></h5>
+          <%end%>
+          <p>Name: <%= pet.name%></p>
+          <p>Age: <%= age(pet.birthday) %></p>
+        </div>
+      <%end%>
     </div>
-  <%end%>
-</div>
+  </div>
 </div>
