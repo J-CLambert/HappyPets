@@ -18,6 +18,7 @@ species = ["dog","cat","bird","turtle","rabbit", "hamster", "ant colony"]
 5.times do
   mail = Faker::Internet.email
   user = User.create!(
+      name: mail,
       email: mail,
       password: mail
   )
