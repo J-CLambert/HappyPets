@@ -1,22 +1,29 @@
-<div class="container search-gird pt-4 pb-4">
+
+
+<div class="container search-gird pt-5 pb-5">
   <h1>A safe start to a lifelong friendship</h1>
   <p>Connect with trusted breeders and rescues</p>
 
   <div class="input-color p-4 rounded-5">
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span>
-      <input type="text" class="form-control" placeholder="Animal Type" aria-label="Username" aria-describedby="addon-wrapping">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot" style="color: #ffbd59;"></i></span>
-      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            <%= form_with url: pets_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Animal Type"
+          %>
+        <%= text_field_tag :location,
+              params[:location],
+              class: "form-control",
+              placeholder: "Location"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary btn-search" %>
+      <% end %>
     </div>
   </div>
 </div>
-
-<div class="d-flex justify-content-between pet-filters">
+<div class="d-flex justify-content-between pet-filters mx-3">
   <%= link_to root_path do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-cat" style="color: #ffbd59;"></i>
@@ -43,7 +50,7 @@
   <% end %>
 </div>
 
-<div class="container banner1 mt-4 mb-4 pt-2 pb-2 ">
+<div class="container mt-4 mb-4 pt-2 pb-2 ">
   <%= image_tag("Banner1.png", class: "img-fluid") %>
   <p class="text-center mt-2 fw-medium">At HappyPets our top priority is safety and the welfare of all pets</p>
 </div>
