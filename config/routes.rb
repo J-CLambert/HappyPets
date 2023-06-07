@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :requests, only: [:new, :create]
     post :search, on: :collection
   end
-
+  get "requests/requested", to: "requests#requested"
   resources :requests, only: [:index, :edit, :update, :destroy] do
     put :confirm, on: :member
   end

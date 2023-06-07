@@ -8,6 +8,14 @@ class RequestsController < ApplicationController
   end
 
   def show; end
+  
+  def requested
+    if current_user.breeder
+      @requests = current_user.pet.request
+    else
+      @request = current_user.request
+    end
+  end
 
   def confirm
     @request.confirmed!
