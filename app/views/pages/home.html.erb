@@ -5,19 +5,11 @@
   <div class="input-color p-4 rounded-5">
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span>
-            <%= form_with url: pets_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: "Animal Type"
-          %>
-        <%= text_field_tag :location,
-              params[:location],
-              class: "form-control",
-              placeholder: "Location"
-          %>
-        <%= submit_tag "Search", name: "", class: "btn btn-primary btn-search" %>
-      <% end %>
+        <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
+          <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
+          <%= f.input :address, label: 'Address', placeholder: "Location"%>
+          <%= f.button :submit, "Search" %>
+        <% end %>
     </div>
   </div>
 </div>

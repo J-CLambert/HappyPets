@@ -8,7 +8,9 @@
             <div class="card-header"><%= pet.title%></div>
           <%end%>
           <div class="card-body">Name: <%= pet.name%> <br>
-          Age: <%= age(pet.birthday) %></div>
+          Age: <%= age(pet.birthday) %><br>
+          Address: <%= pet.user.address%>
+          </div>
         </div>
       <%end%>
     </div>

@@ -3,15 +3,8 @@ class PetsController < ApplicationController
   skip_before_action :authenticate_user!, only: :search
   def index
     @pets = Pet.all
-  end
-
-  def show
-    @request = Request.new
-  end
-
-  def search
-    address = params[:address]
-    pet = params[:pet]
+    address = params[:search][:address]
+    pet = params[:search] [:pet]
 
     if address.present? && pet.present?
       users = User.near(address, 10)
@@ -25,10 +18,12 @@ class PetsController < ApplicationController
       @pets = Pet.where(user: users)
     elsif pet.present?
       pets = PgSearch.multisearch(pet)
-      @pets = results.map(&:searchable)
-    else
-      @pets.Pet.all
+      @pets = pets.map(&:searchable)
     end
+  end
+
+  def show
+    @request = Request.new
   end
 
   def new
