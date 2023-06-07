@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+  get "pages/dashboard", to: "pages#dashboard"
   resources :pets do
     resources :requests, only: [:new, :create]
+    post :search, on: :collection
   end
 
   resources :requests, only: [:index, :edit, :update, :destroy] do
