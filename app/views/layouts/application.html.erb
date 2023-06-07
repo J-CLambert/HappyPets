@@ -12,14 +12,13 @@
 
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-        <i class="fa-regular fa-user p-" style="color: #000000;"></i> </button>
-    <a class="navbar-brand" href="#">
-<%= image_tag "Logo.svg" %>
-  </a>
+    <% if user_signed_in?%>
+    <i class="fa-regular fa-user m-0" style="color: #000000;"></i>
+    <%= current_user.name%>
+    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
           <li class="nav-item active">
@@ -31,12 +30,18 @@
           <li class="nav-item dropdown">
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" data-turbo-method="delete" href="#">Log out</a>
+              <a class="dropdown-item" href="#">Profil</a>
+              <%if user_signed_in?%>
+                <%= button_to "Log out", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
+              <%else%>
+                <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
+              <%end%>
             </div>
           </li>
-
+    <%else%>
+    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
+    <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
+    <%end%>
           <!--li class="nav-item"-->
           <!--/li-->
       </ul>

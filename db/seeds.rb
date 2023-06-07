@@ -29,6 +29,7 @@ address = ["Via Albarelle 58, Ascona, switzerland",
 5.times do
   mail = Faker::Internet.email
   user = User.create!(
+      name: mail,
       email: mail,
       password: mail,
       address: address.shuffle.first,
