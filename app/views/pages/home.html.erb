@@ -3,8 +3,8 @@
   <p>Connect with trusted breeders and rescues</p>
 
   <div class="input-color p-4 rounded-5">
-    <div class="input-group flex-nowrap">
-      <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span>
+    <%# <div class="input-group flex-nowrap"> %>
+      <%# <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span> %>
         <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
           <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
           <%= f.input :address, label: 'Address', placeholder: "Location"%>
