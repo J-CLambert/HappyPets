@@ -1,17 +1,44 @@
-<div class="container p-2">
-<h1>A safe start to a lifelong friendship</h1>
-<p>Connect with trusted breeders and rescues</p>
+<div class="container search-gird pt-4 pb-4">
+  <h1>A safe start to a lifelong friendship</h1>
+  <p>Connect with trusted breeders and rescues</p>
 
   <div class="input-color p-4 rounded-5">
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span>
-        <input type="text" class="form-control" placeholder="Animal Type" aria-label="Username" aria-describedby="addon-wrapping">
+      <input type="text" class="form-control" placeholder="Animal Type" aria-label="Username" aria-describedby="addon-wrapping">
     </div>
 
     <div class="input-group">
       <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot" style="color: #ffbd59;"></i></span>
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-between pet-filters">
+  <%= link_to root_path do %>
+    <div class="d-flex flex-column justify-content-center">
+      <i class="fa-solid fa-cat" style="color: #ffbd59;"></i>
+      <span class="text-center">Cats</span>
+    </div>
+  <% end %>
+  <%= link_to root_path do %>
+    <div class="d-flex flex-column justify-content-center">
+      <i class="fa-solid fa-dog" style="color: #ffbd59;"></i>
+      <span class="text-center">Dorgs</span>
+    </div>
+  <% end %>
+  <%= link_to root_path do %>
+    <div class="d-flex flex-column justify-content-center">
+      <i class="fa-solid fa-dove" style="color: #ffbd59;"></i>
+      <span class="text-center">Birds</span>
+    </div>
+  <% end %>
+  <%= link_to root_path do %>
+    <div class="d-flex flex-column justify-content-center">
+      <i class="fa-solid fa-staff-snake" style="color: #ffbd59;"></i>
+      <span class="text-center">Snake</span>
+    </div>
+  <% end %>
 </div>
