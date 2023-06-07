@@ -8,12 +8,12 @@ class RequestsController < ApplicationController
   end
 
   def show; end
-  
+
   def requested
     if current_user.breeder
-      @requests = current_user.pet.request
+      @requests = Request.where(pet: current_user.pets)
     else
-      @request = current_user.request
+      @request = current_user.requests
     end
   end
 
