@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :pets do
     resources :requests, only: [:new, :create]
+    post :search, on: :collection
   end
 
   resources :requests, only: [:index, :edit, :update, :destroy] do
