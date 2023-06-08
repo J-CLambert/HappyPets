@@ -18,8 +18,8 @@ class RequestsController < ApplicationController
   end
 
   def confirm
-    @request.confirmed!
-    if @request.confirmed!
+    @request.confirmed_visit!
+    if @request.confirmed_visit!
       flash[:notice] = 'Request confirmed successfully'
     else
       flash[:alert] = 'There was an error confirming this request'
