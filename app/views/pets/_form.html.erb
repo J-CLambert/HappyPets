@@ -1,61 +1,24 @@
-<div class="row justify-content-center m-5">
-    <div class="col-md-8">
-        <div class="card shadow">
-            <div class="row">
-                <div class="col-md-6 ">
-                <h1>image_pet</h1>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <%= form_with model: pet, html: {class: 'form-horizontal'} do |f| %>
-                            <div class="form-group">
-                                <%= f.label :name, class: 'control-label' %>
-                                <%= f.text_field :name, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :price, class: 'control-label' %>
-                                <%= f.number_field :price, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :species, class: 'control-label' %>
-                                <%= f.text_field :species, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :breed, class: 'control-label' %>
-                                <%= f.text_field :breed, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :description, class: 'control-label' %>
-                                <%= f.text_area :description, size: "70x5", class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :title, class: 'control-label' %>
-                                <%= f.text_field :title, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :birthday, class: 'control-label' %>
-                                <%= f.date_field  :birthday, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :vaccinated_against, class: 'control-label' %>
-                                <%= f.text_field :vaccinated_against, class: 'form-control' %>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.submit "Submit", class: 'btn btn-warning m-3' %>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
-            </div>
+<div class=" container row justify-content-center m-5">
+  <div class="col-md-8">
+    <div class="card shadow">
+      <div class="col-md-6">
+        <div class="card-body">
+          <%= simple_form_for @pet, html: { class: 'form-horizontal' } do |f| %>
+            <%= f.input :name %>
+            <%= f.input :price %>
+            <%= f.input :species %>
+            <%= f.input :breed %>
+            <%= f.input :name %>
+            <%= f.input :description %>
+            <%= f.input :title %>
+            <%= f.label :birthday, class: 'control-label' %>
+            <%= f.date_field  :birthday, class: 'form-control' %>
+            <%= f.input :photos, as: :file, input_html: { multiple: true }, class: 'form-control' %>
+            <%= f.input :vaccinated_against %>
+            <%= f.submit "Submit" %>
+          <% end %>
         </div>
+      </div>
     </div>
+  </div>
 </div>
