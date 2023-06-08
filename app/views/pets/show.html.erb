@@ -1,16 +1,94 @@
-<h1><%= @pet.name %></h1>
-<% if @pet.image.attached? %>
-  <%= image_tag "dog-cat.jpg" %>
-<% end %>
-<p>Price: <%= @pet.price %></p>
-<p>Breed: <%= @pet.breed %></p>
-<p>Description: <%= @pet.description %></p>
-<p>Title: <%= @pet.title %></p>
-<p>Birthday: <%= @pet.birthday %></p>
-<p>Vaccinated Against: <%= @pet.vaccinated_against %></p>
-<p>Species: <%= @pet.species %></p>
+<div class="bg-white">
+  <a href="<%= pets_path %>" class="text-decoration-none text-dark rounded-5 m-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M5.354 2.646a.5.5 0 0 1 0 .708L2.707 7H12.5a.5.5 0 0 1 0 1H2.707l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
+    </svg>
+    Back
+  </a>
+</div>
 
-<% if current_user && current_user == @pet.user %>
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag("dog-cat.jpg", class: "img-fluid") %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag("dog-cat.jpg", class: "img-fluid") %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag("dog-cat.jpg", class: "img-fluid") %>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+
+<div class="container bg-white">
+  <h3 class="pt-2 text-center">Détails</h3>
+  <p class="pt-2"><%= @pet.description %></p>
+
+  <div class="row pt-4">
+    <div class="col">
+      <p>Pets name</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.name %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Breed</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.breed %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Title</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.title %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Birthday</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.birthday %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Vaccinated Agains</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.vaccinated_against %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Species</p>
+    </div>
+    <div class="col text-end">
+      <p><%= @pet.species %></p>
+    </div>
+  </div>
+
+  <p class="text-end pt-3">Price: <%= @pet.price %></p>
+  <% if current_user && current_user == @pet.user %>
   <p>
     <%= link_to 'Edit', edit_pet_path(@pet) %> |
     <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -23,35 +101,32 @@
   </p>
 <% end %>
 
-<% if @pet.requests.any? %>
-  <h2>Visit Requests</h2>
-  <ul>
-    <% @pet.requests.each do |request| %>
-      <li><%= link_to request.title, request_path(request) %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= link_to 'Back', pets_path %>
-
-<%= @pet.name %>
-<div class="container">
+<div class="container bg-white">
+  <h2 class="text-center">Visit Requests</h2>
   <div class="row justify-content-center">
     <div class="col-10">
       <%= simple_form_for [@pet, @request] do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-        <div class="form-inputs">
-          <%= f.input :title %>
-          <%= f.input :message %>
-          <%= f.input :visit_date, label: "Proposing Visit Date", as: :datetime, minute_step: 30 %>
-        </div>
-
+    <div class="form-group">
+      <%= f.input :message %>
+    </div>
+    <div class="form-group">
+      <%= f.datetime_select :visit_date, minute_step: 30, discard_seconds: true %>
+  </div>
         <div class="form-actions">
-          <%= f.button :submit %>
+          <%= f.button :submit, class: "btn btn-dark btn-block" %>
         </div>
       <% end %>
     </div>
   </div>
+</div>
+
+<% if @pet.request.any? %>
+  <ul>
+    <% @pet.request.each do |request| %>
+      <li><%= link_to request.title, request_path(request) %></li>
+    <% end %>
+  </ul>
+<% end %>
 </div>
