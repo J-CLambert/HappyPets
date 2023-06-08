@@ -3,22 +3,23 @@ class PetsController < ApplicationController
   skip_before_action :authenticate_user!, only: :search
   def index
     @pets = Pet.all
-
     pet = params.dig(:search, :pet)
     address = params.dig(:search, :address)
-    if address.present? && pet.present?
+
+    if params[:species]
+      @pets = Pet.where(species: params[:species])
+    elsif address.present? && pet.present?
       users = User.near(address, 10)
       results = PgSearch.multisearch(pet)
       pets = results.map(&:searchable)
-      @pets = pets.select do |pet|
-        users.include?(pet.user)
-      end
+      @pets = pets.select { |pet| pet && users.include?(pet.user) }
     elsif address.present?
       users = User.near(address, 10)
       @pets = Pet.where(user_id: users.map(&:id))
     elsif pet.present?
       pets = PgSearch.multisearch(pet)
-      @pets = pets.map(&:searchable)
+      pets = pets.map(&:searchable)
+      @pets = pets.select { |pet| pet }
     end
   end
 
