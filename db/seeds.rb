@@ -14,13 +14,27 @@ Pet.delete_all
 puts 'Deleting previous users'
 User.delete_all
 
-species = ["dog","cat","bird","turtle","rabbit", "hamster", "ant colony"]
+species = ["dog","cat","bird","snake"]
+boolean = ["true", "false"]
+address = ["Via Albarelle 58, Ascona, switzerland",
+          "Rue de Saint-Jean 90, Geneva, Switzerland",
+          "Spinatsch 41, Trin, Switzerland",
+          "Rue Sismondi 3, Geneva, Switzerland",
+          "Chemin des Petits-Bois 30, Geneva, Switzerland",
+          "54 Plattenstrasse, zurich, switzerland",
+          "20 Chemin de la Bâtie, Geneva, switzerland",
+          "27 Spitalstrasse, Aargau, Switzerland",
+          "Chemin la Planie 38, Wallis, Switzerland"
+        ]
 5.times do
   mail = Faker::Internet.email
   user = User.create!(
+      name: mail,
       email: mail,
-      password: mail
-  )
+      password: mail,
+      address: address.shuffle.first,
+      breeder: boolean.shuffle.first
+      )
 
   puts 'Creating 5 fake pets per user...'
     5.times do

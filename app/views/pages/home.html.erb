@@ -3,42 +3,60 @@
   <p>Connect with trusted breeders and rescues</p>
 
   <div class="input-color p-4 rounded-5">
-    <div class="input-group flex-nowrap">
-      <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span>
-      <input type="text" class="form-control" placeholder="Animal Type" aria-label="Username" aria-describedby="addon-wrapping">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-location-dot" style="color: #ffbd59;"></i></span>
-      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+    <%# <div class="input-group flex-nowrap"> %>
+      <%# <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span> %>
+        <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
+          <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
+          <%= f.input :address, label: 'Address', placeholder: "Location"%>
+          <%= f.button :submit, "Search" %>
+        <% end %>
     </div>
   </div>
 </div>
-
-<div class="d-flex justify-content-between pet-filters">
-  <%= link_to root_path do %>
+<div class="d-flex justify-content-between pet-filters mx-3">
+  <%= link_to pets_path(species: "cat") do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-cat" style="color: #ffbd59;"></i>
       <span class="text-center">Cats</span>
     </div>
   <% end %>
-  <%= link_to root_path do %>
+  <%= link_to pets_path(species: "dog") do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-dog" style="color: #ffbd59;"></i>
-      <span class="text-center">Dorgs</span>
+      <span class="text-center">Dogs</span>
     </div>
   <% end %>
-  <%= link_to root_path do %>
+  <%= link_to pets_path(species: "bird") do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-dove" style="color: #ffbd59;"></i>
       <span class="text-center">Birds</span>
     </div>
   <% end %>
-  <%= link_to root_path do %>
+  <%= link_to pets_path(species: "snake") do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-staff-snake" style="color: #ffbd59;"></i>
       <span class="text-center">Snake</span>
     </div>
   <% end %>
+</div>
+
+<div class="container mt-4 mb-4 pt-2 pb-2 ">
+  <%= image_tag("Banner1.png", class: "img-fluid") %>
+  <p class="text-center mt-2 fw-medium">At HappyPets our top priority is safety and the welfare of all pets</p>
+</div>
+
+<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
+  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
+  <h3 class="text-center">Robust ID verification</h3>
+  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
+</div>
+<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
+  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
+  <h3 class="text-center">Robust ID verification</h3>
+  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
+</div>
+<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
+  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
+  <h3 class="text-center">Robust ID verification</h3>
+  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
 </div>
