@@ -1,3 +1,12 @@
+<div class="bg-white">
+  <a href="<%= pets_path %>" class="text-decoration-none text-dark rounded-5 m-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M5.354 2.646a.5.5 0 0 1 0 .708L2.707 7H12.5a.5.5 0 0 1 0 1H2.707l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
+    </svg>
+    Back
+  </a>
+</div>
+
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -20,10 +29,10 @@
   </a>
 </div>
 
-<div class="container">
-<h3>Détails</h3>
-  <p class=""><%= @pet.description %></p>
-<div class="row">
+<div class="container bg-white  ">
+<h3 class="pt-2 text-center">Détails</h3>
+  <p class="pt-2"><%= @pet.description %></p>
+<div class="row pt-4">
   <div class="col">
     <p>Pets name</p>
   </div>
@@ -72,7 +81,7 @@
   </div>
 </div>
 
-  <p>Price: <%= @pet.price %></p>
+  <p class="text-end pt-3">Price: <%= @pet.price %></p>
 </div>
 
 
@@ -89,35 +98,32 @@
   </p>
 <% end %>
 
+<div class="container bg-white">
+  <h2 class="text-center">Visit Requests</h2>
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= simple_form_for [@pet, @request] do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-group">
+      <%= f.input :message %>
+    </div>
+    <div class="form-group">
+      <%= f.label :visit_date %>
+      <%= f.datetime_select :visit_date, minute_step: 30, discard_seconds: true %>
+  </div>
+        <div class="form-actions">
+          <%= f.button :submit, class: "btn btn-dark btn-block" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <% if @pet.request.any? %>
-  <h2>Visit Requests</h2>
   <ul>
     <% @pet.request.each do |request| %>
       <li><%= link_to request.title, request_path(request) %></li>
     <% end %>
   </ul>
 <% end %>
-
-<%= link_to 'Back', pets_path %>
-
-<%= @pet.name %>
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-10">
-      <%= simple_form_for [@pet, @request] do |f| %>
-        <%= f.error_notification %>
-        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-        <div class="form-inputs">
-          <%= f.input :title %>
-          <%= f.input :message %>
-          <%= f.input :visit_date, label: "Proposing Visit Date", as: :datetime, minute_step: 30 %>
-        </div>
-
-        <div class="form-actions">
-          <%= f.button :submit %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
