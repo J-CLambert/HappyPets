@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     post :search, on: :collection
   end
   get "requests/requested", to: "requests#requested"
-  resources :requests, only: [:index, :edit, :update, :destroy] do
-    put :confirm, on: :member
+  resources :requests, only: [:index, :edit, :destroy] do
+    post :confirm, :refuse,  on: :member
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
