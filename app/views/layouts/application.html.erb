@@ -68,23 +68,22 @@
 </div>
 
 <%=yield%>
+<% if user_signed_in? %>
+
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
   <div class="container-fluid backgroundcolor p-3">
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
   <div class="container-fluid backgroundcolor p-2">
-    <%# <a href="/route1">
-      <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
-    </a> %>
-    <a href="/route2">
-      <i class="fa-regular fa-envelope" style="color: #000000;"></i>    </a>
-    <a href="/route3">
-      <i class="fa-regular fa-heart" style="color: #000000;"></i>
+    <a href="/route1">
+<i class="fa-solid fa-table-columns" style="color: #000000;"></i>
     </a>
-    <a href="/route4">
-      <i class="fa-regular fa-bell" style="color: #000000;"></i>
-    </a>
+
+    <a><i class="fa-regular fa-envelope" style="color: #000000;"></i></a>
+    <a><i class="fa-regular fa-heart" style="color: #000000;"></i></a>
+    <a><i class="fa-regular fa-bell" style="color: #000000;"></i></a>
   </div>
 </nav>
+<% end %>
 
 
   </div>
