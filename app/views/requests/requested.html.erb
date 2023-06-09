@@ -1,0 +1,31 @@
+<h1 class="text-center m-4">My Requests<%= "s" if @requests.count > 1 %></h1>
+<div class="row m-3">
+  <% @requests.each do |request| %>
+    <div class="col-md-4 ">
+      <div class="card shadow rounded-5 mb-4 p-2 bg-white">
+        <div class="card-body">
+          <h5 class="card-title"><%= request.title %></h5>
+          <p class="card-text"><%= request.message %></p>
+          <small class="blockquote-footer">Sended at <%= request.created_at.strftime("%d %B %Y, %H:%M") %></small>
+        </div>
+        <div class="card-footer rounded-5">
+          <%if request.status == "confirmed_visit"%>
+            <p class="text-success text-center my-auto">Confirmed</p>
+          <%elsif request.status == "refused"%>
+            <p class="text-danger text-center my-auto">Refused</p>
+          <%else%>
+            <%if current_user.breeder%>
+              <p class="card-text"><small class="text-muted">Visit for <%= request.visit_date.strftime("%d %B %Y, %H:%M") %></small></p>
+              <div class="btn-group btn-group-toggle d-flex justify-content-between" data-toggle="buttons">
+                <%= button_to "Accept", confirm_request_path(request), class: "btn btn-outline-success px-1 py-2 mx-2 mb-2"%>
+                <%= button_to "Refuse", refuse_request_path(request), class: "btn btn-outline-danger px-1 py-2 mx-2 mb-2"%>
+              </div>
+            <%else%>
+              <p class="text-secondary text-center my-auto">Pending</p>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

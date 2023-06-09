@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_pet, only: %i[new create]
-  before_action :set_request, only: %i[show edit update destroy confirm]
+  before_action :set_request, only: %i[show edit update destroy confirm refuse]
   # skip_before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   def index
@@ -9,13 +9,32 @@ class RequestsController < ApplicationController
 
   def show; end
 
+  def requested
+    if current_user.breeder
+      @requests = Request.where(pet: current_user.pets)
+    else
+      @requests = current_user.requests
+    end
+  end
+
   def confirm
-    @request.confirmed!
-    if @request.confirmed!
+    @request.confirmed_visit!
+    if @request.confirmed_visit!
       flash[:notice] = 'Request confirmed successfully'
     else
       flash[:alert] = 'There was an error confirming this request'
     end
+    redirect_to requests_requested_path, notice: 'request was successfully confirmed!'
+  end
+
+  def refuse
+    @request.refused!
+    if @request.refused!
+      flash[:notice] = 'Request refused successfully'
+    else
+      flash[:alert] = 'There was an error refusing this request'
+    end
+    redirect_to requests_requested_path, notice: 'request was successfully refused!'
   end
 
   def new
@@ -54,13 +73,13 @@ class RequestsController < ApplicationController
 
   def destroy
     @request.destroy
-    redirect_to requests_path, notice: 'request was successfully deleted.'
+    redirect_to requests_requested_path, notice: 'request was successfully deleted.'
   end
 
   private
 
   def set_request
-    @request = request.find(params[:id])
+    @request = Request.find(params[:id])
   end
 
   def request_params

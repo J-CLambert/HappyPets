@@ -21,6 +21,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+          <%if !current_user.breeder%>
+            <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
+            <div class="column">
+              <div class="row">
+                <div class="col-lg-5 me-3">
+                  <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
+                </div>
+                <div class="col-lg-5">
+                  <%= f.input :address, label: 'Address', placeholder: "Location"%>
+                </div>
+                  <div class="col-lg-2">
+                <%= f.button :submit, "Search" %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
           <li class="nav-item active">
             <a class="nav-link" href="#">Home</a>
           </li>
@@ -55,9 +72,9 @@
   <div class="container-fluid backgroundcolor p-3">
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
   <div class="container-fluid backgroundcolor p-2">
-    <a href="/route1">
+    <%# <a href="/route1">
       <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
-    </a>
+    </a> %>
     <a href="/route2">
       <i class="fa-regular fa-envelope" style="color: #000000;"></i>    </a>
     <a href="/route3">
