@@ -5,13 +5,12 @@
   <div class="input-color p-4 rounded-5">
     <%# <div class="input-group flex-nowrap"> %>
       <%# <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span> %>
-        <% if !current_user.breeder%>
           <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
             <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
             <%= f.input :address, label: 'Address', placeholder: "Location"%>
             <%= f.button :submit, "Search" %>
           <% end %>
-        <%else%>
+        <%if user_signed_in? && current_user.breeder%>
           <p class="text-center">Give your animals a forever home!</p>
           <%= link_to "click here!",  requests_requested_path, class: "home_button"%>
         <% end %>
