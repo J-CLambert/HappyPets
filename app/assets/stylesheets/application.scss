@@ -40,9 +40,18 @@
     border-radius: 20px;
   }
 }
-.home_button {
-  display: inline-block;
-  background: #FFBD59;
-  border-radius: 50px;
-  color:black;
+.home_button_container {
+  text-align: center;
+
+  .home_button {
+    display: inline-block;
+    width: 225.22px;
+    height: 42.89px;
+    background: #FFBD59;
+    border-radius: 50px;
+    color:black;
+    text-align: center;
+    line-height: 42.89px;
+  }
+
 }
