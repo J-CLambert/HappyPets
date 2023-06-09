@@ -68,26 +68,37 @@
 </div>
 
 <%=yield%>
-<% if user_signed_in? %>
 
+<% if user_signed_in? %>
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
   <div class="container-fluid backgroundcolor p-3">
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
   <div class="container-fluid backgroundcolor p-2">
-    <a href="/route1">
-<i class="fa-solid fa-table-columns" style="color: #000000;"></i>
-    </a>
-
-    <a><i class="fa-regular fa-envelope" style="color: #000000;"></i></a>
-    <a><i class="fa-regular fa-heart" style="color: #000000;"></i></a>
-    <a><i class="fa-regular fa-bell" style="color: #000000;"></i></a>
+    <% if current_user.breeder %>
+      <%= link_to dashboard_path do%>
+        <i class="fa-solid fa-table-columns" style="color: #000000;"></i>
+      <%end%>
+        <i class="fa-regular fa-envelope" style="color: #000000;"></i>
+      <%= link_to new_pet_path do%>
+        <i class="fa-solid fa-plus" style="color: #000000;"></i>
+      <%end%>
+      <%= link_to requests_requested_path do%>
+        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+      <%end%>
+    <% else %>
+      <i class="fa-regular fa-envelope" style="color: #000000;"></i>
+      <i class="fa-regular fa-heart" style="color: #000000;"></i>
+      <%= link_to requests_requested_path do%>
+        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+      <%end%>
+    <%end%>
   </div>
+</nav>
 </nav>
 <% end %>
 
 
   </div>
-</nav>
   </body>
 
 </html>
