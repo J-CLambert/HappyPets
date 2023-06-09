@@ -100,7 +100,6 @@
     <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
   </p>
 <% end %>
-
 <div class="container bg-white">
   <h2 class="text-center">Visit Requests</h2>
   <div class="row justify-content-center">
@@ -117,16 +116,13 @@
         <div class="form-actions ">
           <%= f.button :submit, class: "btn btn-dark btn-block" %>
         </div>
+<% if current_user && current_user != @pet.user %>
+  <p>
+    <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
+  </p>
+<% end %>
       <% end %>
     </div>
   </div>
 </div>
-
-<% if @pet.request.any? %>
-  <ul>
-    <% @pet.request.each do |request| %>
-      <li><%= link_to request.title, request_path(request) %></li>
-    <% end %>
-  </ul>
-<% end %>
 </div>
