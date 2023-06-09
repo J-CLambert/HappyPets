@@ -8,7 +8,7 @@
         <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
           <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
           <%= f.input :address, label: 'Address', placeholder: "Location"%>
-          <%= f.button :submit, "Search" %>
+          <%= f.button :submit, "Search", class: "btn-search rounded-4" %>
         <% end %>
     </div>
   </div>
