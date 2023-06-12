@@ -1,0 +1,16 @@
+<div id="message-<%= message.id %>">
+  <small>
+    <strong><%= message.user.name %></strong>
+    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p><%= message.content %></p>
+  <%= simple_form_for [@messenger, @message],
+  html: { data: { action: "turbo:submit-end->messenger-subscription#resetForm" }, class: "d-flex" } do |f| %>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message ##{@messenger.name}",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+  <% end %>
+</div>

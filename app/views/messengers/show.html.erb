@@ -1,14 +1,11 @@
-<div class="container messenger">
+<div class="container messenger"
+  data-controller = "messenger-subscription"
+  data-messenger-subscription-messenger-id-value="<%= @messenger.id %>"
+>
   <h1>Chat</h1>
-  <div class="messages">
-    <% @chatroom.messages.each do |message| %>
-      <div id="message-<%= message.id %>">
-        <small>
-          <strong><%= message.user.nickname %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
+  <div class="messages" data-messenger-subscription-target="messages">
+    <% @messenger.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
     <% end %>
   </div>
 </div>
