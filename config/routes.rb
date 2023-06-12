@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :requests, only: [:index, :edit, :destroy] do
     post :confirm, :refuse,  on: :member
   end
+
+  resources :messengers, only: :show
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
