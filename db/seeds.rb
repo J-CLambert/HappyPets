@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 require "faker"
+require 'cloudinary'
+
 
 puts 'Deleting requests'
 Request.delete_all
@@ -36,9 +38,10 @@ address = ["Via Albarelle 58, Ascona, switzerland",
       breeder: boolean.shuffle.first
       )
 
-  puts 'Creating 5 fake pets per user...'
-    5.times do
-      pet = Pet.create!(
+      puts 'Creating 5 fake pets per user...'
+
+      5.times do
+        pet = Pet.create!(
           name: Faker::Name.name,
           price: Faker::Commerce.price(range: 10..50),
           breed: Faker::Creature::Horse.breed,
@@ -46,10 +49,15 @@ address = ["Via Albarelle 58, Ascona, switzerland",
           title: Faker::Quote.famous_last_words,
           birthday: Faker::Date.between(from: '1940-09-23', to: Date.today),
           vaccinated_against: Faker::JapaneseMedia::StudioGhibli.character,
-          user_id: user.id,
-          species: species.shuffle.first
-      )
-    end
+          user_id: User.pluck(:id).sample,
+          species: species.shuffle.first,
+          photos: Cloudinary::Utils.cloudinary_url("v6f2jtssebai8xl6xuiiqyg4gdr0", secure: true) # Remplacez "sample" par le nom de votre image par défaut dans Cloudinary
+        )
+      end
+
+
+      puts 'Finish creating fake pets per user.'
+
 end
 
 puts  "creating requests"
