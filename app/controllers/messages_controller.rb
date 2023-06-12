@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @messenger = Messenger.find(params[:id])
+    @messenger = Messenger.find(params[:messenger_id])
     @message = Message.new(message_params)
     @message.messenger = @messenger
     @message.user = current_user
