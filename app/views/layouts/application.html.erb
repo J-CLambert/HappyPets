@@ -13,9 +13,21 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <% if user_signed_in?%>
-    <i class="fa-regular fa-user m-0" style="color: #000000;"></i>
-    <%= current_user.name%>
-    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
+  <div class="d-flex">
+  <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+      <p class="name"><%= current_user.name%></p>
+  <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="#">Profil</a>
+    <% if user_signed_in? %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <% else %>
+      <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
+    <% end %>
+  </div>
+  </div>
+
+
+    <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,25 +50,10 @@
             </div>
             <% end %>
           <% end %>
-          <li class="nav-item active">
             <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">Messages</a>
-          </li>
-          <li class="nav-item dropdown">
-            <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Profil</a>
-              <%if user_signed_in?%>
-                <%= button_to "Log out", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
-              <%else%>
-                <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
-              <%end%>
-            </div>
-          </li>
     <%else%>
-    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
+    <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
     <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
     <%end%>
           <!--li class="nav-item"-->
@@ -95,6 +92,8 @@
   </div>
 </nav>
 </nav>
+<div class="main-content" style="margin-bottom: 60px;">
+  </div>
 <% end %>
 
 
