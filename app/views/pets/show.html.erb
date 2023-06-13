@@ -23,87 +23,75 @@
   <% end %>
 </div>
 
+
 <div>
   <h3 class="pt-2 text-center title-show">Détails</h3>
 </div>
 
 <div class="container">
-  <p class="pl-2 pr-2 pt-0"><%= @pet.description %></p>
-  <div class="row pt-4">
-    <div class="col">
-      <p>Pets name</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.name %></p>
-    </div>
-  </div>
+  <div class=" container card rounded-5 bg-white" style="width: 22rem;">
+    <div class="card-body">
+      <p class="pt-3"><%= @pet.description %></p>
+      <div class="row">
+        <div class="col">
+          <p class="fw-bold ">Pets name</p>
+        </div>
+        <div class="col text-end">
+          <p class=""><%= @pet.name %></p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Breed</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.breed %></p>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col">
+          <p class="fw-bold">Breed</p>
+        </div>
+        <div class="col text-end">
+          <p class=""><%= @pet.breed %></p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Title</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.title %></p>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col">
+          <p class="fw-bold">Birthday</p>
+        </div>
+        <div class="col text-end">
+          <p class=""><%= @pet.birthday %></p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Birthday</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.birthday %></p>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col">
+          <p class="fw-bold">Vaccinated</p>
+        </div>
+        <div class="col text-end">
+          <p class=""><%= @pet.vaccinated_against %></p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Vaccinated Agains</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.vaccinated_against %></p>
-    </div>
-  </div>
+      <p class="text-end pt-3 fw-bold pl-4">Price: <%= @pet.price %></p>
+      <% if current_user && current_user == @pet.user %>
+      <p>
+        <%= link_to 'Edit', edit_pet_path(@pet), class: "btn btn-primary me-2" %>
+        <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      </p>
 
-  <div class="row">
-    <div class="col">
-      <p>Species</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.species %></p>
-    </div>
-  </div>
-
-  <p class="text-end pt-3">Price: <%= @pet.price %></p>
-  <% if current_user && current_user == @pet.user %>
-  <p>
-    <%= link_to 'Edit', edit_pet_path(@pet) %> |
-    <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
-</div>
-
-<div class="container bg-white">
-  <h2 class="text-center pt-5">Visit Requests</h2>
-  <div class="row justify-content-center">
-    <div class="col-10 pt-3">
-      <%= simple_form_for [@pet, @request] do |f| %>
-        <%= f.error_notification %>
-        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.input :message %>
-        <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
-        <%= f.button :submit, class: "btn btn-dark btn-block d-flex" %>
       <% end %>
+      <div>
+      <% unless current_user.breeder && @pet.user == current_user%>
+        <h2 class="text-center pt-5">Visit Requests</h2>
+      <div class="row justify-content-center">
+      <div class="col-10 pt-3">
+          <%= simple_form_for [@pet, @request] do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <%= f.input :message %>
+          <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
+          <%= f.button :submit, class: "btn btn-dark btn-block d-flex" %>
+        <% end %>
+      </div>
+    </div>
+</div>
     </div>
   </div>
-</div>
+<% end %>
 </div>

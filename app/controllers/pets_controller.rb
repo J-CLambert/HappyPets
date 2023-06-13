@@ -1,6 +1,7 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy bookings]
   skip_before_action :authenticate_user!, only: :search
+
   def index
     @pets = Pet.all
     pet = params.dig(:search, :pet)
@@ -21,6 +22,10 @@ class PetsController < ApplicationController
       pets = pets.map(&:searchable)
       @pets = pets.select { |pet| pet }
     end
+  end
+
+  def index_breeder
+    @pets = Pet.where(user: current_user)
   end
 
   def show
@@ -73,6 +78,7 @@ class PetsController < ApplicationController
   end
 
   def pet_params
-    params.require(:pet).permit(:name, :price, :description, :breed ,:title, :birthday, :vaccinated_against, :species, photos: [])
+    params.require(:pet).permit(:name, :price, :description, :breed, :title, :birthday, :vaccinated_against, :species,
+                                photos: [])
   end
 end

@@ -1,0 +1,8 @@
+<% if @pets.empty?%>
+  <div class="container my-4 text-center">
+    <i class="error fa-solid fa-circle-exclamation" style="color: #ffbd59;"></i>
+    Sorry, you have not posted any ads, would you like to add one?
+  </div>
+<%else%>
+  <%= render 'pets_card' %>
+<%end%>
