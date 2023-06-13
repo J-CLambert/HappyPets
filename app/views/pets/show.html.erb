@@ -93,6 +93,7 @@
 </div>
 
 <div class="container bg-white">
+<% unless current_user.breeder && @pet.user == current_user%>
   <h2 class="text-center pt-5">Visit Requests</h2>
   <div class="row justify-content-center">
     <div class="col-10 pt-3">
@@ -105,5 +106,5 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>
 </div>
