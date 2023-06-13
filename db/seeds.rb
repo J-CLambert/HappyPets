@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require "faker"
 require 'cloudinary'
+require "open-uri"
 
 
 puts 'Deleting requests'
@@ -28,45 +29,44 @@ address = ["Via Albarelle 58, Ascona, switzerland",
           "27 Spitalstrasse, Aargau, Switzerland",
           "Chemin la Planie 38, Wallis, Switzerland"
         ]
-5.times do
-  mail = Faker::Internet.email
-  user = User.create!(
-      name: mail,
-      email: mail,
-      password: mail,
-      address: address.shuffle.first,
-      breeder: boolean.shuffle.first
-      )
+        1.times do
+          mail = Faker::Internet.email
+          user = User.create!(
+            name: mail,
+            email: mail,
+            password: mail,
+            address: address.shuffle.first,
+            breeder: boolean.shuffle.first
+          )
+        end
 
-      puts 'Creating 5 fake pets per user...'
-
-      5.times do
-        pet = Pet.create!(
-          name: Faker::Name.name,
-          price: Faker::Commerce.price(range: 10..50),
-          breed: Faker::Creature::Horse.breed,
-          description: Faker::Quote.yoda,
-          title: Faker::Quote.famous_last_words,
-          birthday: Faker::Date.between(from: '1940-09-23', to: Date.today),
-          vaccinated_against: Faker::JapaneseMedia::StudioGhibli.character,
-          user_id: User.pluck(:id).sample,
-          species: species.shuffle.first,
-          photos: Cloudinary::Utils.cloudinary_url("v6f2jtssebai8xl6xuiiqyg4gdr0", secure: true) # Remplacez "sample" par le nom de votre image par défaut dans Cloudinary
-        )
-      end
+puts 'Creating 1 fake pets per user...'
 
 
-      puts 'Finish creating fake pets per user.'
-
-end
-
-puts  "creating requests"
-  20.times do
-    request = Request.create!(
-      message: Faker::Quotes::Shakespeare.king_richard_iii_quote,
-      title: Faker::Quotes::Shakespeare.as_you_like_it_quote,
-      visit_date: Date.today,
-      pet_id: Pet.pluck(:id).sample,
-      user_id: User.pluck(:id).sample
+  photos_cat_1 = []
+  photos_cat_1 << {
+    io: URI.open("https://wannacat.org/wp-content/uploads/2020/12/DSC03387-2.jpg"),
+    filename: 'photo_cat_1_1.png',
+    content_type: 'image/png'
+  }
+  photos_cat_1 << {
+    io: URI.open("https://images.prismic.io/trustedhousesitters/ee6e6fb5-a9a3-402a-9af5-314fabe7c69a_siamese+cat.png?auto=compress,format&rect=0,0,1920,800&w=960&h=400"),
+    filename: 'photo_cat_1_2.png',
+    content_type: 'image/png'
+  }
+  file_cat = URI.open("https://www.rd.com/wp-content/uploads/2021/04/GettyImages-145679137-scaled-e1619025176434.jpg?w=2515")
+    pet = Pet.new(
+      name: Faker::Name.name,
+      price: Faker::Commerce.price(range: 10..50),
+      breed: Faker::Creature::Horse.breed,
+      description: Faker::Quote.yoda,
+      title: Faker::Quote.famous_last_words,
+      birthday: Faker::Date.between(from: '1940-09-23', to: Date.today),
+      vaccinated_against: Faker::JapaneseMedia::StudioGhibli.character,
+      user_id: User.pluck(:id).sample,
+      species: species.shuffle.first,
     )
-  end
+  pet.photos.attach(photos_cat_1)
+  pet.save
+
+  puts 'Finish creating fake pets per user.'
