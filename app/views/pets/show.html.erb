@@ -25,14 +25,18 @@
 
 
 <div>
-  <h3 class="pt-2 text-center title-show">Détails</h3>
+  <h3 class="color-details text-center title-show p-2">Détails</h3>
 </div>
 
 <div class="container">
+<<<<<<< Updated upstream
   <div class=" container card rounded-5 bg-white" style="width: 22rem;">
+=======
+  <div class="container card rounded-5 bg-white" style="width: 22rem;">
+>>>>>>> Stashed changes
     <div class="card-body">
-      <p class="pt-3"><%= @pet.description %></p>
-      <div class="row">
+      <p class="pt-2"><%= @pet.description %></p>
+      <div class="row pt-4">
         <div class="col">
           <p class="fw-bold ">Pets name</p>
         </div>
@@ -78,15 +82,22 @@
       <% end %>
       <div>
       <% unless current_user.breeder && @pet.user == current_user%>
-        <h2 class="text-center pt-5">Visit Requests</h2>
       <div class="row justify-content-center">
-      <div class="col-10 pt-3">
+      <div class="col-10 mt-5">
           <%= simple_form_for [@pet, @request] do |f| %>
           <%= f.error_notification %>
           <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
           <%= f.input :message %>
-          <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
-          <%= f.button :submit, class: "btn btn-dark btn-block d-flex" %>
+      <div class="form-group">
+        <%= f.label :visit_date %>
+        <%= f.date_field :visit_date, discard_year: false, discard_month: false, discard_day: false, class: 'form-control' %>
+      </div>
+      <div class="form-group mt-2">
+        <%= f.label :visit_time %>
+        <%= f.time_select :visit_time, minute_step: 30, ignore_date: true, class: 'form-control' %>
+      </div>
+
+          <%= f.button :submit, class: "btn btn-dark btn-block d-flex mt-4" %>
         <% end %>
       </div>
     </div>

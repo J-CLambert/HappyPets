@@ -1,4 +1,6 @@
 class Request < ApplicationRecord
+  attr_accessor :visit_time
+
   belongs_to :pet
   belongs_to :user
 
