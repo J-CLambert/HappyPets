@@ -27,60 +27,42 @@
 <div>
   <h3 class="color-details text-center title-show p-2">Détails</h3>
 </div>
-
 <div class="container">
-<<<<<<< Updated upstream
-  <div class=" container card rounded-5 bg-white" style="width: 22rem;">
-=======
-  <div class="container card rounded-5 bg-white" style="width: 22rem;">
->>>>>>> Stashed changes
+  <div class="card bg-white rounded-5" style="max-width: 540px;">
+    <div class="card-header bg-transparent border-bottom">
+      <p class="text-muted mb-2"><%= @pet.description %></p>
+    </div>
     <div class="card-body">
-      <p class="pt-2"><%= @pet.description %></p>
-      <div class="row pt-4">
-        <div class="col">
-          <p class="fw-bold ">Pets name</p>
-        </div>
-        <div class="col text-end">
-          <p class=""><%= @pet.name %></p>
-        </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Pets name</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.name %></div>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <p class="fw-bold">Breed</p>
-        </div>
-        <div class="col text-end">
-          <p class=""><%= @pet.breed %></p>
-        </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Breed</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.breed %></div>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <p class="fw-bold">Birthday</p>
-        </div>
-        <div class="col text-end">
-          <p class=""><%= @pet.birthday %></p>
-        </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Birthday</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.birthday %></div>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <p class="fw-bold">Vaccinated</p>
-        </div>
-        <div class="col text-end">
-          <p class=""><%= @pet.vaccinated_against %></p>
-        </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Vaccinated</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.vaccinated_against %></div>
       </div>
 
-      <p class="text-end pt-3 fw-bold pl-4">Price: <%= @pet.price %></p>
+      <p class="text-end fw-bold mt-3 border-bottom">Price: <%= @pet.price %></p>
+
       <% if current_user && current_user == @pet.user %>
-      <p>
-        <%= link_to 'Edit', edit_pet_path(@pet), class: "btn btn-primary me-2" %>
-        <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-      </p>
-
+        <div class="d-flex justify-content-end mt-3">
+          <%= link_to 'Edit', edit_pet_path(@pet), class: "btn btn-primary me-2" %>
+          <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </div>
       <% end %>
-      <div>
+            <div>
       <% unless current_user.breeder && @pet.user == current_user%>
       <div class="row justify-content-center">
       <div class="col-10 mt-5">
@@ -105,4 +87,7 @@
     </div>
   </div>
 <% end %>
+</div>
+    </div>
+  </div>
 </div>
