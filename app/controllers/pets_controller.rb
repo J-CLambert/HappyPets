@@ -1,30 +1,31 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy bookings]
   skip_before_action :authenticate_user!, only: :search
-  def index
-    if !current_user.breeder
-      @pets = Pet.all
-      pet = params.dig(:search, :pet)
-      address = params.dig(:search, :address)
 
-      if params[:species]
-        @pets = Pet.where(species: params[:species])
-      elsif address.present? && pet.present?
-        users = User.near(address, 10)
-        results = PgSearch.multisearch(pet)
-        pets = results.map(&:searchable)
-        @pets = pets.select { |pet| pet && users.include?(pet.user) }
-      elsif address.present?
-        users = User.near(address, 10)
-        @pets = Pet.where(user_id: users.map(&:id))
-      elsif pet.present?
-        pets = PgSearch.multisearch(pet)
-        pets = pets.map(&:searchable)
-        @pets = pets.select { |pet| pet }
-      end
-    elsif current_user.breeder
-      @pets = Pet.where(user_id: current_user.id)
+  def index
+    @pets = Pet.all
+    pet = params.dig(:search, :pet)
+    address = params.dig(:search, :address)
+
+    if params[:species]
+      @pets = Pet.where(species: params[:species])
+    elsif address.present? && pet.present?
+      users = User.near(address, 10)
+      results = PgSearch.multisearch(pet)
+      pets = results.map(&:searchable)
+      @pets = pets.select { |pet| pet && users.include?(pet.user) }
+    elsif address.present?
+      users = User.near(address, 10)
+      @pets = Pet.where(user_id: users.map(&:id))
+    elsif pet.present?
+      pets = PgSearch.multisearch(pet)
+      pets = pets.map(&:searchable)
+      @pets = pets.select { |pet| pet }
     end
+  end
+
+  def index_breeder
+    @pets = Pet.where(user: current_user)
   end
 
   def show
