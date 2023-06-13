@@ -1,4 +1,4 @@
-<div class=" container row justify-content-center m-5">
+<div class="container d-flex align-items-center justify-content-center vh-100 mt-4">
   <div class="col-md-8">
     <div class="card shadow">
       <div class="col-md-6">
@@ -8,17 +8,17 @@
             <%= f.input :price %>
             <%= f.input :species %>
             <%= f.input :breed %>
-            <%= f.input :name %>
             <%= f.input :description %>
             <%= f.input :title %>
             <%= f.label :birthday, class: 'control-label' %>
-            <%= f.date_field  :birthday, class: 'form-control' %>
+            <%= f.date_field :birthday, class: 'form-control', max: Date.today %>
             <%= f.input :photos, as: :file, input_html: { multiple: true }, class: 'form-control' %>
             <%= f.input :vaccinated_against %>
             <%= f.submit "Submit" %>
           <% end %>
         </div>
       </div>
+
     </div>
   </div>
 </div>
