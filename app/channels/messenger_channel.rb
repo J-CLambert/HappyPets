@@ -2,11 +2,9 @@ class MessengerChannel < ApplicationCable::Channel
   def subscribed
     messenger = Messenger.find(params[:id])
     stream_for messenger
-    # stream_from "some_channel"
   end
 
   def unsubscribed
-    stop_all_streams
-    # Any cleanup needed when channel is unsubscribed
+    stop_all_streams # Any cleanup needed when channel is unsubscribed
   end
 end
