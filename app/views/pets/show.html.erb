@@ -6,17 +6,13 @@
     Back
   </a>
 </div>
-<div class="container bg-white">
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <% @pet.photos.each_with_index do |photo, index| %>
-      <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'd-block w-100' %>
-      </div>
-    <% end %>
+    <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'd-block w-100' %>
   </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
@@ -24,10 +20,15 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+  <% end %>
 </div>
-  <h3 class="pt-2 text-center">Détails</h3>
-  <p class="pt-2"><%= @pet.description %></p>
 
+<div>
+  <h3 class="pt-2 text-center title-show">Détails</h3>
+</div>
+
+<div class="container">
+  <p class="pl-2 pr-2 pt-0"><%= @pet.description %></p>
   <div class="row pt-4">
     <div class="col">
       <p>Pets name</p>
@@ -89,33 +90,18 @@
     <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' } %>
   </p>
 <% end %>
+</div>
 
-<% if current_user && current_user != @pet.user %>
-  <p>
-    <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
-  </p>
-<% end %>
 <div class="container bg-white">
-  <h2 class="text-center">Visit Requests</h2>
+  <h2 class="text-center pt-5">Visit Requests</h2>
   <div class="row justify-content-center">
-    <div class="col-10">
+    <div class="col-10 pt-3">
       <%= simple_form_for [@pet, @request] do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <div class="form-group">
-      <%= f.input :message %>
-    </div>
-    <div class="form-group mb-3">
-      <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
-  </div>
-        <div class="form-actions ">
-          <%= f.button :submit, class: "btn btn-dark btn-block" %>
-        </div>
-<% if current_user && current_user != @pet.user %>
-  <p>
-    <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
-  </p>
-<% end %>
+        <%= f.input :message %>
+        <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
+        <%= f.button :submit, class: "btn btn-dark btn-block d-flex" %>
       <% end %>
     </div>
   </div>

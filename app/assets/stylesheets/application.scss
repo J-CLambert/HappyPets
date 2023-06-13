@@ -62,3 +62,19 @@
   margin-bottom: 80px;
   /* Remplacez 60px par la hauteur de votre navbar */
 }
+
+.name {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.logo {
+  width: 80px;
+  /* Définir la largeur souhaitée */
+  height: auto;
+  /* Laisser la hauteur ajustée automatiquement */
+}
+
+.profile-parent {
+  align-items: center;
+}
