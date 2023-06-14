@@ -68,25 +68,25 @@
 
 <% if user_signed_in? %>
 <nav class="navbar fixed-bottom bg-body-tertiary p-0">
-  <div class="container-fluid backgroundcolor p-3">
-<nav class="navbar fixed-bottom bg-body-tertiary p-0">
-  <div class="container-fluid backgroundcolor p-2">
+  <div class="container-fluid backgroundcolor ">
+<nav class="navbar fixed-bottom bg-body-tertiary p-0" id="bottom-nav">
+  <div class="container-fluid backgroundcolor p-3" id="bottom-nav">
     <% if current_user.breeder %>
       <%= link_to dashboard_path do%>
-        <i class="fa-solid fa-table-columns" style="color: #000000;"></i>
+        <i class="fa-solid fa-table-columns fa-lg" style="color: #ffffff;"></i>
       <%end%>
-        <i class="fa-regular fa-envelope" style="color: #000000;"></i>
+        <i class="fa-regular fa-envelope fa-lg" style="color: #ffffff;"></i>
       <%= link_to new_pet_path do%>
-        <i class="fa-solid fa-plus" style="color: #000000;"></i>
+        <i class="fa-solid fa-plus fa-lg" style="color: #ffffff;"></i>
       <%end%>
       <%= link_to requests_requested_path do%>
-        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+        <i class="fa-regular fa-bell fa-lg" style="color: #ffffff;"></i>
       <%end%>
     <% else %>
-      <i class="fa-regular fa-envelope" style="color: #000000;"></i>
-      <i class="fa-regular fa-heart" style="color: #000000;"></i>
+      <i class="fa-regular fa-envelope fa-lg" style="color: #ffffff;"></i>
+      <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
       <%= link_to requests_requested_path do%>
-        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+        <i class="fa-regular fa-bell fa-lg" style="color: #ffffff;"></i>
       <%end%>
     <%end%>
   </div>
