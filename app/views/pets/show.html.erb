@@ -1,10 +1,10 @@
 <div class="bg-white">
-  <a href="<%= pets_path %>" class="text-decoration-none text-dark rounded-5 m-1">
+  <%= link_to :back, class: "text-decoration-none text-dark rounded-5 m-1" do%>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M5.354 2.646a.5.5 0 0 1 0 .708L2.707 7H12.5a.5.5 0 0 1 0 1H2.707l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
     </svg>
     Back
-  </a>
+  <%end%>
 </div>
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
