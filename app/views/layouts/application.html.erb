@@ -17,7 +17,6 @@
   <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
       <p class="name"><%= current_user.name%></p>
   <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="#">Profil</a>
     <% if user_signed_in? %>
       <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
     <% else %>
@@ -33,7 +32,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <%if !current_user.breeder%>
             <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
             <div class="column">
               <div class="row">
@@ -49,7 +47,6 @@
               </div>
             </div>
             <% end %>
-          <% end %>
     <%else%>
     <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
     <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
