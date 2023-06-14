@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require "faker"
 require 'cloudinary'
+require "open-uri"
 
 
 puts 'Deleting requests'
@@ -28,45 +29,70 @@ address = ["Via Albarelle 58, Ascona, switzerland",
           "27 Spitalstrasse, Aargau, Switzerland",
           "Chemin la Planie 38, Wallis, Switzerland"
         ]
-5.times do
-  mail = Faker::Internet.email
-  user = User.create!(
-      name: mail,
-      email: mail,
-      password: mail,
-      address: address.shuffle.first,
-      breeder: boolean.shuffle.first
-      )
+        1.times do
+          mail = Faker::Internet.email
+          user = User.create!(
+            name: mail,
+            email: mail,
+            password: mail,
+            address: address.shuffle.first,
+            breeder: boolean.shuffle.first
+          )
+        end
 
-      puts 'Creating 5 fake pets per user...'
-
-      5.times do
-        pet = Pet.create!(
-          name: Faker::Name.name,
-          price: Faker::Commerce.price(range: 10..50),
-          breed: Faker::Creature::Horse.breed,
-          description: Faker::Quote.yoda,
-          title: Faker::Quote.famous_last_words,
-          birthday: Faker::Date.between(from: '1940-09-23', to: Date.today),
-          vaccinated_against: Faker::JapaneseMedia::StudioGhibli.character,
-          user_id: User.pluck(:id).sample,
-          species: species.shuffle.first,
-          photos: Cloudinary::Utils.cloudinary_url("v6f2jtssebai8xl6xuiiqyg4gdr0", secure: true) # Remplacez "sample" par le nom de votre image par défaut dans Cloudinary
-        )
-      end
+puts 'Creating 1 fake pets per user...'
 
 
-      puts 'Finish creating fake pets per user.'
-
-end
-
-puts  "creating requests"
-  20.times do
-    request = Request.create!(
-      message: Faker::Quotes::Shakespeare.king_richard_iii_quote,
-      title: Faker::Quotes::Shakespeare.as_you_like_it_quote,
-      visit_date: Date.today,
-      pet_id: Pet.pluck(:id).sample,
-      user_id: User.pluck(:id).sample
+  photos_cat_1 = []
+  photos_cat_1 << {
+    io: File.open("../../app/assets/images/all_cats/cat1/photo-1570419868699-b5e996ef2796.avif"),
+    filename: 'photo_cat1_1.png',
+    content_type: 'image/png'
+  }
+  photos_cat_1 << {
+    io: File.open("../../app/assets/images/all_cats/cat1/photo-1582530182198-98b5312880f6.avif"),
+    filename: 'photo_cat1_2.png',
+    content_type: 'image/png'
+  }
+    pet = Pet.new(
+      name: "Nala",
+      price: Faker::Commerce.price(range: 10..500),
+      breed: "European Shorthair",
+      description: "This cat has a personality as vibrant as a sunbeam. Social and playful, it loves being the star of the show and will seize every opportunity to capture attention, whether by playing with its favourite toys or hopping on your lap when you're trying to work. This cat's antics never fail to bring a smile.",
+      title: "Nala",
+      birthday: Faker::Date.between(from: '2020-09-23', to: Date.today),
+      vaccinated_against: "Typhus, Coryza, FeLV",
+      user_id: User.pluck(:id).sample,
+      species: "cat",
     )
-  end
+  pet.photos.attach(photos_cat_1)
+  pet.save
+
+
+
+  photos_cat2 = []
+  photos_cat2 << {
+    io: File.open("../../app/assets/images/all_cats/cat2/photo-1549878569-a8105b1188b8.avif"),
+    filename: 'photo_cat2_1.png',
+    content_type: 'image/png'
+  }
+  photos_cat2 << {
+    io: File.open("../../app/assets/images/all_cats/cat2/photo-1572590603603-f828f6682212.avif"),
+    filename: 'photo_cat2_2.png',
+    content_type: 'image/png'
+  }
+    pet = Pet.new(
+      name: "Félix",
+      price: Faker::Commerce.price(range: 10..500),
+      breed: "siamese",
+      description: "Gentle and loving, this feline is the embodiment of affection. It will spend countless hours purring in your lap, always ready for a cuddle. But when it's not dozing off, it enjoys a good game of hide-and-seek or chasing after a piece of string. This cat's combination of curiosity and affection makes it the perfect companion.",
+      title: "Félix",
+      birthday: Faker::Date.between(from: '2020-09-23', to: Date.today),
+      vaccinated_against: "Coryza,Typhus",
+      user_id: User.pluck(:id).sample,
+      species: "cat",
+    )
+  pet.photos.attach(photos_cat2)
+  pet.save
+
+  puts 'Finish creating fake pets per user.'

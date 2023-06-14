@@ -48,7 +48,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to request_url(@request), notice: "Request was successfully created." }
+        format.html { redirect_to requests_requested_path, notice: "Request was successfully created." }
         format.json { render :show, status: :created, location: @pet }
       else
         format.html { render :new, status: :unprocessable_entity }
