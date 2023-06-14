@@ -208,7 +208,6 @@ pets_info = [
 ]
 pets_info.each_with_index do |pet_info, pet_number|
   pet = Pet.new(
-    title: pets_info[pet_number][:name],
     name: pets_info[pet_number][:name],
     price: Faker::Commerce.price(range: 10..500),
     breed: pets_info[pet_number][:breed],
