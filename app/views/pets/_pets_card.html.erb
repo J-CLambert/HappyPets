@@ -4,13 +4,13 @@
       <% @pets.each do |pet| %>
         <div class="petcard card mb-4">
           <%= link_to pet_path(pet) do%>
-            <%= image_tag "dog.jpg", class: "card-img-top", alt: "dog"%>
+            <%= cl_image_tag pet.photos.first.key, height: 300, width: 400, crop: :fill %>
           <%end%>
           <div class="card-body">
-          Name: <%= pet.name%> <br>
-          Age: <%= age(pet.birthday) %><br>
-          Species: <%= pet.species%> <br>
-          Address: <%= pet.user.address%>
+            Name: <%= pet.name%> <br>
+            Age: <%= age(pet.birthday) %><br>
+            Species: <%= pet.species%> <br>
+            Address: <%= pet.user.address%>
           </div>
         </div>
       <%end%>
