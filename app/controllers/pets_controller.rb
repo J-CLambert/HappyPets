@@ -68,7 +68,7 @@ class PetsController < ApplicationController
 
   def destroy
     @pet.destroy
-    redirect_to :root, status: :see_other
+    redirect_to index_breeder_pets_path
   end
 
   private
