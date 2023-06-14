@@ -6,10 +6,9 @@
           <%= simple_form_for @pet, html: { class: 'form-horizontal' } do |f| %>
             <%= f.input :name %>
             <%= f.input :price %>
-            <%= f.input :species %>
+            <%= f.input :species, collection: ["dog", "cat", "bird", "snake"]%>
             <%= f.input :breed %>
             <%= f.input :description %>
-            <%= f.input :title %>
             <%= f.label :birthday, class: 'control-label' %>
             <%= f.date_field :birthday, class: 'form-control', max: Date.today %>
             <%= f.input :photos, as: :file, input_html: { multiple: true }, class: 'form-control' %>

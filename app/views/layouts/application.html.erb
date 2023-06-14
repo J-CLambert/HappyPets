@@ -17,7 +17,6 @@
   <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
       <p class="name"><%= current_user.name%></p>
   <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="#">Profil</a>
     <% if user_signed_in? %>
       <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
     <% else %>
@@ -28,12 +27,11 @@
 
 
     <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: none;">
+      <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffbd59;"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <%if !current_user.breeder%>
             <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
             <div class="column">
               <div class="row">
@@ -43,15 +41,12 @@
                 <div class="col-lg-5">
                   <%= f.input :address, label: 'Address', placeholder: "Location"%>
                 </div>
-                  <div class="col-lg-2">
-                <%= f.button :submit, "Search" %>
+                  <div class="col-lg-2 ">
+                <%= f.button :submit, "Search", class: "custom-button" %>
                 </div>
               </div>
             </div>
             <% end %>
-          <% end %>
-            <a class="nav-link" href="#">Home</a>
-            <a class="nav-link" href="#">Messages</a>
     <%else%>
     <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
     <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
@@ -67,10 +62,10 @@
 <%=yield%>
 
 <% if user_signed_in? %>
-<nav class="navbar fixed-bottom bg-body-tertiary p-0">
+<nav class="navbar fixed-bottom bg-body-tertiary p-0" >
   <div class="container-fluid backgroundcolor ">
 <nav class="navbar fixed-bottom bg-body-tertiary p-0" id="bottom-nav">
-  <div class="container-fluid backgroundcolor p-3" id="bottom-nav">
+  <div class="container-fluid backgroundcolor p-3 pb-4" id="bottom-nav">
     <% if current_user.breeder %>
       <%= link_to dashboard_path do%>
         <i class="fa-solid fa-table-columns fa-lg" style="color: #ffffff;"></i>
