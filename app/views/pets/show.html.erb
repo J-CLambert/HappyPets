@@ -1,4 +1,4 @@
-<div class="bg-white">
+<div class="bg-white pb-3">
   <%= link_to :back, class: "text-decoration-none text-dark rounded-5 m-1" do%>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M5.354 2.646a.5.5 0 0 1 0 .708L2.707 7H12.5a.5.5 0 0 1 0 1H2.707l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
@@ -24,9 +24,7 @@
 </div>
 
 
-<div>
-  <h3 class="color-details text-center title-show p-2">Détails</h3>
-</div>
+  <h3 class="color-details text-center title-show p-2 banner-radius pt-3 pb-3 mb-4">Détails</h3>
 <div class="container">
   <div class="card bg-white rounded-5" style="max-width: 540px;">
     <div class="card-header bg-transparent border-bottom">
@@ -54,7 +52,7 @@
         <div class="col-sm-6 text-sm-end"><%= @pet.vaccinated_against %></div>
       </div>
 
-      <p class="text-end fw-bold mt-3 border-bottom">Price: <%= @pet.price %></p>
+      <p class="text-end fw-bold mt-3 border-bottom pb-2">Price: <%= @pet.price %></p>
 
       <% if current_user && current_user == @pet.user %>
         <div class="d-flex justify-content-end mt-3">
