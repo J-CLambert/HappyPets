@@ -1,25 +1,15 @@
-<div class="container search-gird pt-4 pb-4">
+<div class="container search-gird pt-4 pb-4 banner-radius">
   <h1>A safe start to a lifelong friendship</h1>
   <p>Connect with trusted breeders and rescues</p>
 
   <div class="input-color p-4 rounded-5">
     <%# <div class="input-group flex-nowrap"> %>
       <%# <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: #ffbd59;"></i></span> %>
-          <% if user_signed_in? == false || (user_signed_in? && !current_user.breeder)%>
-            <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
-              <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
-              <%= f.input :address, label: 'Address', placeholder: "Location"%>
-              <div class="btn btn-search rounded-5">
-              <%= f.button :submit, "Search"%>
-              </div>
-            <% end %>
-          <%elsif user_signed_in? && current_user.breeder%>
-            <p class="text-center">Give your animals a forever home!</p>
-          <div class="home_button_container">
-            <%= link_to "click here!", new_pet_path, class: "home_button text-center", style: "text-decoration: none;" %>
-          </div>
-
-          <% end %>
+        <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
+          <%= f.input :pet, label: 'Pet', placeholder: "Find your perfect companion" %>
+          <%= f.input :address, label: 'Address', placeholder: "Location"%>
+          <%= f.button :submit, "Search" %>
+        <% end %>
     </div>
   </div>
 </div>
@@ -45,7 +35,7 @@
   <%= link_to pets_path(species: "snake") do %>
     <div class="d-flex flex-column justify-content-center">
       <i class="fa-solid fa-staff-snake" style="color: #ffbd59;"></i>
-      <span class="text-center">Snake</span>
+      <span class="text-center">Snakes</span>
     </div>
   <% end %>
 </div>
@@ -55,18 +45,20 @@
   <p class="text-center mt-2 fw-medium">At HappyPets our top priority is safety and the welfare of all pets</p>
 </div>
 
-<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
-  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
-  <h3 class="text-center">Robust ID verification</h3>
-  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
+<div class="d-flex flex-column align-items-center justify-content-center p-3 banner1 m-3 rounded-5 mt-4 mb-4">
+  <%= image_tag('elderly-person-spendng-tim-with-their-pets.jpg', alt: 'Dog and Cat', class: 'rounded-circle mb-3', style: 'width: 150px; height: 150px; object-fit: cover;') %>
+  <h3 class="text-center">Trust and Peace of Mind</h3>
+  <p class="text-center">Connect with verified breeders and buyers on a secure platform.</p>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
-  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
-  <h3 class="text-center">Robust ID verification</h3>
-  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
+
+<div class="d-flex flex-column align-items-center justify-content-center p-3 banner1 m-3 rounded-5 mt-4 mb-4">
+  <%= image_tag('close-up-woman-holding-cocker-spaniel.jpg', alt: 'Woman Holding Cocker', class: 'rounded-circle mb-3', style: 'width: 150px; height: 150px; object-fit: cover;') %>
+  <h3 class="text-center">Find Your Perfect Companion</h3>
+  <p class="text-center">Discover lifelong pet companionship with trusted breeders and rescues.</p>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center p-2 banner1 m-2 rounded-5 mt-4 mb-4">
-  <i class="fa-regular fa-address-card fa-3x mb-3" style="color: #000000;"></i>
-  <h3 class="text-center">Robust ID verification</h3>
-  <p class="text-center">ID verified breeders and buyers to make our site even safer and more transparent.</p>
+<div class="d-flex flex-column align-items-center justify-content-center p-3 banner1 m-3 rounded-5 mt-4 mb-4">
+  <%= image_tag('mother-with-son-dog.jpg', alt: 'Mother with Son and Dog', class: 'rounded-circle mb-3', style: 'width: 150px; height: 150px; object-fit: cover;') %>
+  <h3 class="text-center">Bringing Joy to Every Home</h3>
+  <p class="text-center">Experience the happiness of welcoming a loving pet into your family</p>
+
 </div>

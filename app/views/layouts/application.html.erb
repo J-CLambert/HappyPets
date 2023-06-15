@@ -13,15 +13,33 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <% if user_signed_in?%>
-    <i class="fa-regular fa-user m-0" style="color: #000000;"></i>
-    <%= current_user.name%>
-    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <div class="d-flex profile-parent">
+<% case current_user.name
+when 'Ciwan' %>
+  <%= image_tag("Ciwan.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'Terri' %>
+  <%= image_tag("tierri.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'J-C' %>
+  <%= image_tag("JC.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% else %>
+  <%= image_tag("JC.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% end %>      <p class="name"><%= current_user.name%></p>
+  <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+    <% if user_signed_in? %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <% else %>
+      <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
+    <% end %>
+  </div>
+  </div>
+
+
+    <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: none;">
+      <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffbd59;"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <%if !current_user.breeder%>
             <%= simple_form_for :search, url: pets_path, method: :get do |f| %>
             <div class="column">
               <div class="row">
@@ -31,41 +49,14 @@
                 <div class="col-lg-5">
                   <%= f.input :address, label: 'Address', placeholder: "Location"%>
                 </div>
-                  <div class="col-lg-2">
-                <%= f.button :submit, "Search" %>
+                  <div class="col-lg-2 ">
+                <%= f.button :submit, "Search", class: "custom-button" %>
                 </div>
               </div>
             </div>
             <% end %>
-          <% end %>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Messages</a>
-          </li>
-          <li class="nav-item dropdown">
-<% case current_user.name
-when 'Ciwan' %>
-  <%= image_tag("Ciwan.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
-<% when 'Terri' %>
-  <%= image_tag("terri.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
-<% when 'J-C' %>
-  <%= image_tag("j-c.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
-<% else %>
-  <%= image_tag("JC.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
-<% end %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Profil</a>
-              <%if user_signed_in?%>
-                <%= button_to "Log out", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
-              <%else%>
-                <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
-              <%end%>
-            </div>
-          </li>
     <%else%>
-    <%= link_to image_tag("Logo.svg"), root_path, class: "navbar-brand" %>
+    <%= link_to image_tag("Logo.svg", class: "navbar-brand logo"), root_path %>
     <%= button_to "log in", new_user_session_path, class: "dropdown-item" %>
     <%end%>
           <!--li class="nav-item"-->
@@ -79,31 +70,33 @@ when 'Ciwan' %>
 <%=yield%>
 
 <% if user_signed_in? %>
-<nav class="navbar fixed-bottom bg-body-tertiary p-0">
-  <div class="container-fluid backgroundcolor p-3">
-<nav class="navbar fixed-bottom bg-body-tertiary p-0">
-  <div class="container-fluid backgroundcolor p-2">
+<nav class="navbar fixed-bottom bg-body-tertiary p-0" >
+  <div class="container-fluid backgroundcolor ">
+<nav class="navbar fixed-bottom bg-body-tertiary p-0" id="bottom-nav">
+  <div class="container-fluid backgroundcolor p-3 pb-4" id="bottom-nav">
     <% if current_user.breeder %>
       <%= link_to dashboard_path do%>
-        <i class="fa-solid fa-table-columns" style="color: #000000;"></i>
+        <i class="fa-solid fa-table-columns fa-lg" style="color: #ffffff;"></i>
       <%end%>
-        <i class="fa-regular fa-envelope" style="color: #000000;"></i>
+        <i class="fa-regular fa-envelope fa-lg" style="color: #ffffff;"></i>
       <%= link_to new_pet_path do%>
-        <i class="fa-solid fa-plus" style="color: #000000;"></i>
+        <i class="fa-solid fa-plus fa-lg" style="color: #ffffff;"></i>
       <%end%>
       <%= link_to requests_requested_path do%>
-        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+        <i class="fa-regular fa-bell fa-lg" style="color: #ffffff;"></i>
       <%end%>
     <% else %>
-      <i class="fa-regular fa-envelope" style="color: #000000;"></i>
-      <i class="fa-regular fa-heart" style="color: #000000;"></i>
+      <i class="fa-regular fa-envelope fa-lg" style="color: #ffffff;"></i>
+      <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
       <%= link_to requests_requested_path do%>
-        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+        <i class="fa-regular fa-bell fa-lg" style="color: #ffffff;"></i>
       <%end%>
     <%end%>
   </div>
 </nav>
 </nav>
+<div class="main-content" style="margin-bottom: 60px;">
+  </div>
 <% end %>
 
 

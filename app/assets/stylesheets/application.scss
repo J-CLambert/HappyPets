@@ -36,10 +36,12 @@
   .card-header {
     background-color: white;
   }
-  .card-img-top{
+
+  .card-img-top {
     border-radius: 20px;
   }
 }
+
 .home_button_container {
   text-align: center;
 
@@ -49,9 +51,44 @@
     height: 42.89px;
     background: #FFBD59;
     border-radius: 50px;
-    color:black;
+    color: black;
     text-align: center;
     line-height: 42.89px;
   }
 
+}
+
+.main-content {
+  margin-bottom: 80px;
+  /* Remplacez 60px par la hauteur de votre navbar */
+}
+
+.name {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.logo {
+  width: 80px;
+  /* Définir la largeur souhaitée */
+  height: auto;
+  /* Laisser la hauteur ajustée automatiquement */
+}
+
+.profile-parent {
+  align-items: center;
+}
+
+#bottom-nav {
+  border-radius: 25px 25px 0 0;
+}
+
+.custom-button {
+  background-color: #FFBD59;
+  color: black;
+  border: none;
+}
+
+body {
+  padding-bottom: 36px;
 }

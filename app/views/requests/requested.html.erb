@@ -21,6 +21,7 @@
                 <%= button_to "Refuse", refuse_request_path(request), class: "btn btn-outline-danger px-1 py-2 mx-2 mb-2"%>
               </div>
             <%else%>
+            <p class="card-text"><small class="text-muted">Visit for <%= request.visit_date.strftime("%d %B %Y, %H:%M") %></small></p>
               <p class="text-secondary text-center my-auto">Pending</p>
             <%end%>
           <%end%>

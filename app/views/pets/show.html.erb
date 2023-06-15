@@ -1,22 +1,18 @@
-<div class="bg-white">
-  <a href="<%= pets_path %>" class="text-decoration-none text-dark rounded-5 m-1">
+<div class="bg-white pb-3">
+  <%= link_to :back, class: "text-decoration-none text-dark rounded-5 m-1" do%>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M5.354 2.646a.5.5 0 0 1 0 .708L2.707 7H12.5a.5.5 0 0 1 0 1H2.707l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
     </svg>
     Back
-  </a>
+  <%end%>
 </div>
-<div class="container bg-white">
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <% @pet.photos.each_with_index do |photo, index| %>
-      <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'd-block w-100' %>
-      </div>
-    <% end %>
+    <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'd-block w-100' %>
   </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
@@ -24,100 +20,68 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+  <% end %>
 </div>
-  <h3 class="pt-2 text-center">Détails</h3>
-  <p class="pt-2"><%= @pet.description %></p>
 
-  <div class="row pt-4">
-    <div class="col">
-      <p>Pets name</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.name %></p>
-    </div>
-  </div>
+<div class="color-details text-center title-show banner-radius pt-2 pb-2 mb-4" style="font-size: 1.3em;"><%= @pet.name %></div>
 
-  <div class="row">
-    <div class="col">
-      <p>Breed</p>
+<div class="container">
+  <div class="card bg-white rounded-5" style="max-width: 540px;">
+    <div class="card-header bg-transparent border-bottom pt-4">
+      <p class="text-muted mb-2"><%= @pet.description %></p>
     </div>
-    <div class="col text-end">
-      <p><%= @pet.breed %></p>
-    </div>
-  </div>
+    <div class="card-body">
 
-  <div class="row">
-    <div class="col">
-      <p>Title</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.title %></p>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Birthday</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.birthday %></p>
-    </div>
-  </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Breed</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.breed %></div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Vaccinated Agains</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.vaccinated_against %></p>
-    </div>
-  </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Birthday</div>
+        <div class="col-12 col-sm-6 text-start"><%= @pet.birthday.strftime("%d/%m/%Y") %></div>
+      </div>
 
-  <div class="row">
-    <div class="col">
-      <p>Species</p>
-    </div>
-    <div class="col text-end">
-      <p><%= @pet.species %></p>
-    </div>
-  </div>
+      <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Vaccinated</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.vaccinated_against %></div>
+      </div>
 
-  <p class="text-end pt-3">Price: <%= @pet.price %></p>
-  <% if current_user && current_user == @pet.user %>
-  <p>
-    <%= link_to 'Edit', edit_pet_path(@pet) %> |
-    <%= link_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
+      <p class="text-end fw-bold mt-3 border-bottom pb-2"><%= @pet.price %> CHF</p>
 
-<% if current_user && current_user != @pet.user %>
-  <p>
-    <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
-  </p>
-<% end %>
-<div class="container bg-white">
-  <h2 class="text-center">Visit Requests</h2>
-  <div class="row justify-content-center">
-    <div class="col-10">
-      <%= simple_form_for [@pet, @request] do |f| %>
-        <%= f.error_notification %>
-        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <div class="form-group">
-      <%= f.input :message %>
-    </div>
-    <div class="form-group mb-3">
-      <%= f.date_field :visit_date, minute_step: 30, discard_seconds: true %>
-  </div>
-        <div class="form-actions ">
-          <%= f.button :submit, class: "btn btn-dark btn-block" %>
+      <% if current_user && current_user == @pet.user %>
+        <div class="d-flex justify-content-end mt-3">
+          <%= button_to 'Edit', edit_pet_path(@pet), class: "btn btn-primary me-2" %>
+          <%= button_to 'Delete', pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
         </div>
-<% if current_user && current_user != @pet.user %>
-  <p>
-    <%= link_to 'Send Visit Request', new_pet_request_path(pet_id: @pet.id) %>
-  </p>
-<% end %>
       <% end %>
+            <div>
+      <% unless current_user.breeder && @pet.user == current_user%>
+      <div class="row justify-content-center">
+      <div class="col-10 mt-5">
+          <%= simple_form_for [@pet, @request] do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <%= f.input :message %>
+      <div class="form-group">
+        <%= f.label :visit_date %>
+        <%= f.date_field :visit_date, value: Date.current, min: Date.current, discard_year: false, discard_month: false, discard_day: false, class: 'form-control' %>
+      </div>
+      <div class="form-group mt-2">
+        <%= f.label :visit_time %>
+        <%= f.time_select :visit_time, minute_step: 30, ignore_date: true, class: 'form-control' %>
+      </div>
+
+          <%= f.button :submit, class: "btn btn-dark btn-block d-flex mt-4" %>
+        <% end %>
+      </div>
+    </div>
+</div>
     </div>
   </div>
+<% end %>
 </div>
+    </div>
+  </div>
 </div>
