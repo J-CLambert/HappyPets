@@ -6,9 +6,11 @@
           <%= link_to pet_path(pet) do%>
             <%= image_tag "dog.jpg", class: "card-img-top", alt: "dog"%>
           <%end%>
-          <%= button_to pet_favorites_path(pet), remote: true, method: :post do %>
-            <i class="fa-regular fa-heart" style="color: #af0d1d;"></i>
-          <% end %>
+          <div data-controller="favorite">
+            <%= button_to pet_favorites_path(pet), remote: true, method: :post, class: 'favorite-button', form_class: 'favorite-button-form', data: { action: "click->favorite#favorite", favorite_url: pet_favorites_path(pet) } do %>
+              <i class="fa-regular fa-heart" style="color: #af0d1d;" data-favorite-target="button"></i>
+            <% end %>
+          </div>
           <div class="card-body">
           Name: <%= pet.name%> <br>
           Age: <%= age(pet.birthday) %><br>
