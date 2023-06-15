@@ -1,5 +1,8 @@
 <div class="container my-4">
   <div class="row justify-content-center">
+    <div class="col-12 text-center mb-4">
+      <h2 class=>Find Your Perfect Pet</h2>
+    </div>
     <div class="col-11">
       <% @pets.each do |pet| %>
         <div class="petcard card mb-4">
@@ -7,10 +10,10 @@
             <%= cl_image_tag pet.photos.first.key, crop: :fill, class: "card-img-top" %>
           <%end%>
           <div class="card-body">
-            Name: <%= pet.name%> <br>
-            Age: <%= age(pet.birthday) %><br>
-            Species: <%= pet.species%> <br>
-            Address: <%= pet.user.address%>
+            <p class="mb-1"><strong>Name:</strong> <span class="text-muted"><%= pet.name %></span></p>
+            <p class="mb-1"><strong>Age:</strong> <span class="text-muted"><%= age(pet.birthday) %></span></p>
+            <p class="mb-1"><strong>Species:</strong> <span class="text-muted"><%= pet.species %></span></p>
+            <p class="mb-1"><strong>Address:</strong> <span class="text-muted"><%= pet.user.address %></span></p>
           </div>
         </div>
       <%end%>
