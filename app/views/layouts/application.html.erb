@@ -14,8 +14,16 @@
   <div class="container-fluid">
     <% if user_signed_in?%>
   <div class="d-flex profile-parent">
-  <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-      <p class="name"><%= current_user.name%></p>
+<% case current_user.name
+when 'Ciwan' %>
+  <%= image_tag("Ciwan.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'Terri' %>
+  <%= image_tag("tierri.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'J-C' %>
+  <%= image_tag("JC.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% else %>
+  <%= image_tag("JC.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% end %>      <p class="name"><%= current_user.name%></p>
   <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
     <% if user_signed_in? %>
       <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
