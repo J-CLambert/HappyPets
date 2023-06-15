@@ -28,7 +28,37 @@ address = ["Via Albarelle 58, Ascona, switzerland",
           "27 Spitalstrasse, Aargau, Switzerland",
           "Chemin la Planie 38, Wallis, Switzerland"
 ]
-3.times do
+
+mail = Faker::Internet.email
+user = User.create!(
+  name: "Terri",
+  email: "terriciwan@gmail.com",
+  password: "terriciwan@gmail.com",
+  address: address.shuffle.first,
+  breeder: true
+)
+
+mail = Faker::Internet.email
+user = User.create!(
+  name: "Ciwan",
+  email: "ciwan@gmail.com",
+  password: "ciwan@gmail.com",
+  address: address.shuffle.first,
+  breeder: false
+)
+
+mail = Faker::Internet.email
+user = User.create!(
+  name: "J-C",
+  email: "lambert@gmail.com",
+  password: "lambert@gmail.com",
+  address: address.shuffle.first,
+  breeder: false
+)
+
+puts 'Creating Cerri Ciwan and J-C acount.'
+
+5.times do
   mail = Faker::Internet.email
   user = User.create!(
     name: mail,
@@ -39,27 +69,10 @@ address = ["Via Albarelle 58, Ascona, switzerland",
   )
 end
 
-mail = Faker::Internet.email
-user = User.create!(
-  name: "Terri",
-  email: mail,
-  password: mail,
-  address: address.shuffle.first,
-  breeder: true
-)
-
-mail = Faker::Internet.email
-user = User.create!(
-  name: "Jean-Christophe",
-  email: mail,
-  password: mail,
-  address: address.shuffle.first,
-  breeder: false
-)
-
-puts 'Creating 5 fake pets per user...'
+puts 'Creating 5 fake user.'
 
 vaccinated_list = ['Salmonellosis', 'Rabies', 'Mites', 'Ticks', 'Fungal Infections']
+# Array of hsah of pet info
 pets_info = [
 #cats
   {
@@ -83,8 +96,8 @@ pets_info = [
   {
     name: "Whiskers",
     description: "Whiskers is a feline with a big heart. He is extremely sociable and will spend countless hours purring in your lap, always ready for a cuddle. But when he's not dozing off, he enjoys a good game of hide-and-seek or chasing after a piece of string. His combination of curiosity and affection makes him the perfect companion.",
-    photo1_path: "app/assets/images/all_cats/cat3/photo-1517035753523-2077b746904d.avif",
-    photo2_path: "app/assets/images/all_cats/cat3/photo-1517035753523-2077b746904d.avif",
+    photo1_path: "app/assets/images/all_cats/cat3/photo-1586410073949-dff5850c1047.avif",
+    photo2_path: "app/assets/images/all_cats/cat3/photo-1586410074130-2c0555714953.avif",
     breed: "strange cat",
     species: "cat"
   },
@@ -228,16 +241,73 @@ pets_info.each_with_index do |pet_info, pet_number|
       content_type: 'image/png'
     }
   ])
-
   pet.save!
 end
 
+puts 'Finish creating 16 realiste fake pets.'
 
+dog_breeds = ['Labrador Retriever', 'German Shepherd', 'Golden Retriever', 'Bulldog', 'Beagle', 'Poodle', 'Rottweiler', 'Yorkshire Terrier', 'Boxer', 'Dachshund']
+cat_breeds = ['Persian', 'Maine Coon', 'Siamese', 'Abyssinian', 'Ragdoll', 'Bengal', 'Sphynx', 'British Shorthair', 'Scottish Fold', 'Burmese']
+bird_breeds = ['Canary', 'Parakeet', 'Cockatiel', 'Lovebird', 'Finch', 'Conure', 'Macaw', 'African Grey Parrot', 'Budgerigar', 'Cockatoo']
+snake_breeds = ['Ball Python', 'Corn Snake', 'Garter Snake', 'Boa Constrictor', 'King Snake', 'Milk Snake', 'Rosy Boa', 'Hognose Snake', 'Green Tree Python', 'Black Rat Snake']
 
+pet_descriptions = [
+  "A wonderful and loving companion that always brings joy with its playful nature. It's hard to have a bad day with this pet around.",
+  "An incredibly friendly pet with a gentle demeanor. Perfect for families, it's always ready to provide comfort and companionship.",
+  "A lively and energetic pet that's always ready for an adventure. With boundless energy, it would love an owner who enjoys outdoor activities.",
+  "A naturally curious pet that loves exploring its surroundings. It's always excited to discover new things and would love a home that can satisfy its curiosity.",
+  "A faithful and loyal pet that loves being in the company of its owner. It's very affectionate and is always ready to lend a comforting presence.",
+  "A very affectionate pet who loves nothing more than a good cuddle. It will never say no to a petting session and will often seek them out.",
+  "A pet with a vibrant personality and a love for playtime. It's always ready to play, whether it's fetch, chase, or simply a game of tag.",
+  "A gentle and calm pet, perfect for a quiet home. It is very content to spend time indoors and appreciates a calm and peaceful environment.",
+  "A pet full of energy, perfect for an active owner. It loves to run, jump, and play, making it a perfect companion for any outdoor adventure.",
+  "A loving pet who enjoys quiet nights in as much as fun-filled days. It's a perfect balance of activity and tranquillity, making it a great companion for all types of owners.",
+  "A pet with a playful spirit and a heart full of love. It's always ready to play, but when it's time to relax, it loves nothing more than a good cuddle.",
+  "A well-behaved pet who loves to learn new tricks. Not only is it fun to be around, but it's also very intelligent and enjoys mental stimulation.",
+  "A social pet that loves being around people and other animals. It's friendly and outgoing, always ready to make new friends at the park or at home.",
+  "An independent pet who also loves to spend time with its owner. It values its alone time, but also appreciates the company and love of its owner.",
+  "A charming pet with a love for all things fun. It has a sunny disposition and loves to play, making every day an adventure.",
+  "A pet that loves outdoor adventures as much as indoor relaxation. It loves to explore and play, but also appreciates a quiet night in with its owner.",
+  "A pet with a friendly disposition and a love for cuddling. It's easy to get along with and makes a wonderful companion for any family or individual.",
+  "A sociable pet that's always excited to make new friends. It's outgoing and friendly, making it a great addition to any home.",
+  "A pet with a gentle soul and a big heart. It loves to love and be loved, making it a perfect companion for any pet lover.",
+  "A loyal and dedicated pet who loves nothing more than being with its owner. It forms strong bonds and is always ready to show its affection."
+]
 
-
-
-
-
-
-  puts 'Finish creating fake pets per user.'
+puts 'Start creating fake pets : '
+for create_4_pet in 1..176 do
+  species = ['dog', 'cat', 'bird', 'snake']
+  i = 0
+  species.each do |specie|
+    i = i + 1
+    case specie
+    when "dog"
+      breed =  dog_breeds.shuffle.first
+    when "cat"
+      breed = cat_breeds.shuffle.first
+    when "bird"
+      breed = bird_breeds.shuffle.first
+    when "snake"
+      breed = snake_breeds.shuffle.first
+    end
+    pet = Pet.new(
+      name: Faker::Creature::Dog.name,
+      price: Faker::Commerce.price(range: 10..500),
+      breed: breed,
+      description: pet_descriptions.sample,
+      birthday: Faker::Date.between(from: '2020-09-23', to: Date.today),
+      vaccinated_against: vaccinated_list.shuffle.first(rand(1..vaccinated_list.length)).join(', '),
+      user_id: User.pluck(:id).sample,
+      species: specie
+    )
+    pet.photos.attach([{
+      io: URI.open("https://source.unsplash.com/random/?#{specie}"),
+      filename: "photo_pet1#{specie}_#{i}.png",
+      content_type: 'image/png'
+    }
+    ])
+    print "."
+    pet.save!
+  end
+end
+puts 'Finish creating 200 fake pets.'
