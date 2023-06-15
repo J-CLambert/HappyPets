@@ -2,6 +2,15 @@
   <div class="row justify-content-center">
     <div class="col-12 text-center mb-4">
       <h3>Find Your Perfect Pet</h3>
+        <% if params[:search][:pet] || params[:search][:address] %>
+          <% if params[:search][:pet] && params[:search][:address] %>
+            <%= "Your search for #{params[:search][:pet]} in #{params[:search][:address] } showed #{@pets.count} results" %>
+          <% elsif params[:search][:address] %>
+            <%= "Your search for #{params[:search][:address]} showed #{@pets.count} results" %>
+          <% else %>
+            <%= "Your search for #{params[:search][:pet]} showed #{@pets.count} results" %>
+          <% end %>
+        <% end %>
     </div>
     <div class="col-11">
       <% @pets.each do |pet| %>
