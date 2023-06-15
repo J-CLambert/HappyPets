@@ -39,6 +39,11 @@
       </div>
 
       <div class="row mb-2">
+        <div class="col-sm-6 fw-bold">Breeder</div>
+        <div class="col-sm-6 text-sm-end"><%= @pet.user.name %></div>
+      </div>
+
+      <div class="row mb-2">
         <div class="col-sm-6 fw-bold">Birthday</div>
         <div class="col-12 col-sm-6 text-start"><%= @pet.birthday.strftime("%d/%m/%Y") %></div>
       </div>

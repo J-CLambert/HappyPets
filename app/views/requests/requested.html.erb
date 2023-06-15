@@ -6,7 +6,12 @@
         <div class="card-body">
           <h5 class="card-title"><%= request.title %></h5>
           <p class="card-text"><%= request.message %></p>
-          <small class="blockquote-footer">Sended at <%= request.created_at.strftime("%d %B %Y, %H:%M") %></small>
+          <small class="blockquote-footer">Sent at <%= request.created_at.strftime("%d %B %Y, %H:%M") %></small><br><%= "\n" %>
+          <p class="card-text">Visit for <%= request.visit_date.strftime("%d %B %Y, %H:%M")%> at <%= request.pet.user.address%></p>
+          <%if !current_user.breeder%>
+            <p class="card-text">Your breeder is <%= request.pet.user.name%></p>
+
+          <%end%>
         </div>
         <div class="card-footer rounded-5">
           <%if request.status == "confirmed_visit"%>
@@ -21,7 +26,6 @@
                 <%= button_to "Refuse", refuse_request_path(request), class: "btn btn-outline-danger px-1 py-2 mx-2 mb-2"%>
               </div>
             <%else%>
-            <p class="card-text"><small class="text-muted">Visit for <%= request.visit_date.strftime("%d %B %Y, %H:%M") %></small></p>
               <p class="text-secondary text-center my-auto">Pending</p>
             <%end%>
           <%end%>
