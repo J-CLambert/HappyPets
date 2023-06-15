@@ -6,6 +6,9 @@
           <%= link_to pet_path(pet) do%>
             <%= image_tag "dog.jpg", class: "card-img-top", alt: "dog"%>
           <%end%>
+          <%= button_to pet_favorites_path(pet), remote: true, method: :post do %>
+            <i class="fa-regular fa-heart" style="color: #af0d1d;"></i>
+          <% end %>
           <div class="card-body">
           Name: <%= pet.name%> <br>
           Age: <%= age(pet.birthday) %><br>

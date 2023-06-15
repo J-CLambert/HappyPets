@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorite/create'
   devise_for :users
   root to: 'pages#home'
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
   resources :pets do
+    resources :favorites, only: [:new, :create]
     resources :requests, only: [:new, :create]
     get :index_breeder, on: :collection
   end
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
     post :confirm, :refuse,  on: :member
   end
 
+  resources :favorites, only: [:index, :destroy]
   resources :messengers, only: :show do
     resources :messages, only: :create
   end
