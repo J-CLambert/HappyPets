@@ -6,7 +6,6 @@ class PetsController < ApplicationController
     @pets = Pet.all
     pet = params.dig(:search, :pet)
     address = params.dig(:search, :address)
-
     if params[:species]
       @pets = Pet.where(species: params[:species])
     elsif address.present? && pet.present?
