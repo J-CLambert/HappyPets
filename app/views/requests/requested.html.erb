@@ -10,7 +10,8 @@
           <p class="card-text">Visit for <%= request.visit_date.strftime("%d %B %Y, %H:%M")%> at <%= request.pet.user.address%></p>
           <%if !current_user.breeder%>
             <p class="card-text">Your breeder is <%= request.pet.user.name%></p>
-
+          <%else%>
+            <p class="card-text">Your customer is <%= request.user.name%></p>
           <%end%>
         </div>
         <div class="card-footer rounded-5">
