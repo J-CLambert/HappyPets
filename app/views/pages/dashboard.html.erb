@@ -3,10 +3,19 @@
     <div class="col-md-6 text-center">
       <div class="rounded-image mx-auto d-block">
         <div style="border-radius: 50%; overflow: hidden; width: 150px; height: 150px; margin: 0 auto;">
-          <%= image_tag 'dog.jpg', class: 'img-fluid', alt: 'Profile Image' %>
+<% case current_user.name
+when 'Ciwan' %>
+  <%= image_tag("Ciwan.png", class: "img-fluid", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'Terri' %>
+  <%= image_tag("tierri.jpg", class: "img-fluid", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% when 'J-C' %>
+  <%= image_tag("JC.jpg", class: "img-fluid", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% else %>
+  <%= image_tag("JC.jpg", class: "img-fluid", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+<% end %>
         </div>
       </div>
-      <h4 class="mt-3 name"><strong>JC Lambert</strong></h4>
+    <h3 class="name"><%= current_user.name%></h3>
     </div>
   </div>
 
