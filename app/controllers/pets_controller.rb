@@ -4,22 +4,28 @@ class PetsController < ApplicationController
 
   def index
     @pets = Pet.all
+    filter_by_species if params[:species]
+    filter_by_search_params if params.dig(:search, :pet) || params.dig(:search, :address)
+  end
+
+  def filter_by_species
+    @pets = Pet.where(species: params[:species])
+  end
+
+  def filter_by_search_params
     pet = params.dig(:search, :pet)
     address = params.dig(:search, :address)
-    if params[:species]
-      @pets = Pet.where(species: params[:species])
-    elsif address.present? && pet.present?
-      users = User.near(address, 10)
-      results = PgSearch.multisearch(pet)
-      pets = results.map(&:searchable)
-      @pets = pets.select { |pet| pet && users.include?(pet.user) }
-    elsif address.present?
-      users = User.near(address, 10)
-      @pets = Pet.where(user_id: users.map(&:id))
-    elsif pet.present?
-      pets = PgSearch.multisearch(pet)
-      pets = pets.map(&:searchable)
-      @pets = pets.select { |pet| pet }
+
+    if address.present?
+      users_near_address = User.near(address, 10)
+      @pets = Pet.where(user_id: users_near_address.map(&:id))
+    end
+
+    return unless pet.present?
+
+    pets_results = PgSearch.multisearch(pet).map(&:searchable)
+    @pets = pets_results.select do |pet_result|
+      pet_result && (address.blank? || users_near_address.include?(pet_result.user))
     end
   end
 
